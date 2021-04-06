@@ -1,0 +1,1 @@
+if statement to display correct home page (logged in or not) 

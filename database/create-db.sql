@@ -50,3 +50,14 @@ CREATE TABLE `petapp`.`post` (
     `imgUrl` VARCHAR(500) NULL,
     FOREIGN KEY (userID) REFERENCES user(userID),
     PRIMARY KEY (`postID`)) ENGINE = InnoDB;
+
+
+CREATE TABLE `petapp`.`comment` ( 
+    `commentID` INT(11) NOT NULL AUTO_INCREMENT,
+    `postID` INT(11) NOT NULL, 
+    `userID` INT(11) NOT NULL, 
+    `text` VARCHAR(500) NULL, 
+    `timestamp` TIMESTAMP NOT NULL,
+    FOREIGN KEY (postID) REFERENCES post(postID), 
+    FOREIGN KEY (userID) REFERENCES user(userID),
+    PRIMARY KEY (`commentID`)) ENGINE = InnoDB;

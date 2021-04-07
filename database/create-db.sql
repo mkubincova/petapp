@@ -41,3 +41,12 @@ CREATE TABLE `petapp`.`animal` (
     `forbiddenFood` VARCHAR(500) NULL, 
     `imgUrl` VARCHAR(500) NULL, 
     PRIMARY KEY (`animalID`)) ENGINE = InnoDB;
+
+CREATE TABLE `petapp`.`post` ( 
+    `postID` INT(11) NOT NULL AUTO_INCREMENT, 
+    `userID` INT(11) NOT NULL, 
+    `text` VARCHAR(500) NULL, 
+    `timestamp` TIMESTAMP NOT NULL, 
+    `imgUrl` VARCHAR(500) NULL,
+    FOREIGN KEY (userID) REFERENCES user(userID),
+    PRIMARY KEY (`postID`)) ENGINE = InnoDB;

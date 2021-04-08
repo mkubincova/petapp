@@ -16,8 +16,8 @@ CREATE TABLE `petapp`.`user` (
 CREATE TABLE `petapp`.`pet` ( 
     `petID` INT(11) NOT NULL AUTO_INCREMENT, 
     `name` VARCHAR(64) NOT NULL, 
-    `breed` VARCHAR(64) NOT NULL,
-    `species` VARCHAR(64) NULL,
+    `species` VARCHAR(64) NOT NULL,
+    `breed` VARCHAR(64) NULL,
     `birthday` DATE NULL,
     `imgUrl` VARCHAR(500) NULL, 
     `likes` VARCHAR(200) NULL, 
@@ -45,7 +45,7 @@ CREATE TABLE `petapp`.`animal` (
 CREATE TABLE `petapp`.`post` ( 
     `postID` INT(11) NOT NULL AUTO_INCREMENT, 
     `userID` INT(11) NOT NULL, 
-    `text` VARCHAR(500) NULL, 
+    `text` VARCHAR(500) NOT NULL, 
     `timestamp` TIMESTAMP NOT NULL, 
     `imgUrl` VARCHAR(500) NULL,
     FOREIGN KEY (userID) REFERENCES user(userID),
@@ -56,7 +56,7 @@ CREATE TABLE `petapp`.`comment` (
     `commentID` INT(11) NOT NULL AUTO_INCREMENT,
     `postID` INT(11) NOT NULL, 
     `userID` INT(11) NOT NULL, 
-    `text` VARCHAR(500) NULL, 
+    `text` VARCHAR(500) NOT NULL, 
     `timestamp` TIMESTAMP NOT NULL,
     FOREIGN KEY (postID) REFERENCES post(postID), 
     FOREIGN KEY (userID) REFERENCES user(userID),

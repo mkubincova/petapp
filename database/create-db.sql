@@ -1,9 +1,9 @@
 /* commands to create all tables, primary keys etc. */
 /* paste in MySql/Heidi to initialize the database */
 
-CREATE DATABASE petapp;
+CREATE DATABASE petsociety;
 
-CREATE TABLE `petapp`.`user` (
+CREATE TABLE `petsociety`.`user` (
     `userID` INT NOT NULL AUTO_INCREMENT, 
     `userType` VARCHAR(10) NOT NULL, 
     `username` VARCHAR(32) NOT NULL, 
@@ -13,7 +13,7 @@ CREATE TABLE `petapp`.`user` (
     `email` VARCHAR(32) NOT NULL, 
     PRIMARY KEY (`userID`)) ENGINE = InnoDB;
 
-CREATE TABLE `petapp`.`pet` ( 
+CREATE TABLE `petsociety`.`pet` ( 
     `petID` INT(11) NOT NULL AUTO_INCREMENT, 
     `name` VARCHAR(64) NOT NULL, 
     `species` VARCHAR(64) NOT NULL,
@@ -25,14 +25,14 @@ CREATE TABLE `petapp`.`pet` (
     `otherInformation` VARCHAR(500) NULL, 
     PRIMARY KEY (`petID`)) ENGINE = InnoDB;
 
-CREATE TABLE `petapp`.`user_pet` (
+CREATE TABLE `petsociety`.`user_pet` (
     `userID` INT(11) NOT NULL,
     `petID` INT(11) NOT NULL,
     FOREIGN KEY (userID) REFERENCES user(userID),
     FOREIGN KEY (petID) REFERENCES pet(petID)
 );
 
-CREATE TABLE `petapp`.`animal` ( 
+CREATE TABLE `petsociety`.`animal` ( 
     `animalID` INT(11) NOT NULL AUTO_INCREMENT, 
     `species` VARCHAR(64) NOT NULL, 
     `facts` VARCHAR(500) NOT NULL, 
@@ -42,7 +42,7 @@ CREATE TABLE `petapp`.`animal` (
     `imgUrl` VARCHAR(500) NULL, 
     PRIMARY KEY (`animalID`)) ENGINE = InnoDB;
 
-CREATE TABLE `petapp`.`post` ( 
+CREATE TABLE `petsociety`.`post` ( 
     `postID` INT(11) NOT NULL AUTO_INCREMENT, 
     `userID` INT(11) NOT NULL, 
     `text` VARCHAR(500) NOT NULL, 
@@ -52,7 +52,7 @@ CREATE TABLE `petapp`.`post` (
     PRIMARY KEY (`postID`)) ENGINE = InnoDB;
 
 
-CREATE TABLE `petapp`.`comment` ( 
+CREATE TABLE `petsociety`.`comment` ( 
     `commentID` INT(11) NOT NULL AUTO_INCREMENT,
     `postID` INT(11) NOT NULL, 
     `userID` INT(11) NOT NULL, 

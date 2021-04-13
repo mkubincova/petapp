@@ -7,7 +7,7 @@
         <input name="fname" type="text" placeholder="First name"><br>
         <input name="lname" type="text" placeholder="Last name"><br>
         <input name="email" type="email" placeholder="Email address"><br>
-        <input name="password" type="password" placeholder="*Password"><br>
+        <input name="password" type="password" placeholder="*Password"><br> <!--add the eye to toggle password visibilty -->
         <input type="submit" value="Register">
     </form>
 </main>

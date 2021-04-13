@@ -28,7 +28,7 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
 
     $stmt = $db->prepare($query);
     $stmt->bind_param("ss", $username, $password);
-    $stmt->bind_result($id, $uname, $psw, $type, $fname, $lname, $email);
+    $stmt->bind_result($id, $type, $uname, $psw, $fname, $lname, $email);
     $stmt->execute();
 
     //set session variables if we found a matching user

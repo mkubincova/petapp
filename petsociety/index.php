@@ -3,7 +3,7 @@
 include 'configurations/config.php';
 
 //if statement to check if the user is logged in
-($_SESSION) ? header("Location: /awa/petsociety/mypets.php") :
-header("Location: /awa/petsociety/home.php");
+($_SESSION) ? header("Location: mypets.php") :
+header("Location: home.php");
 
 ?>

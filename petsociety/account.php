@@ -57,7 +57,7 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
         $_SESSION["firstName"] = $fname;
         $_SESSION["lastName"] = $lname;
         $_SESSION["email"] = $email;
-        header("Location: /awa/petsociety/account.php");
+        header("Location: account.php");
     } else {
         echo "<p>Editing failed, please try again.</p>";
     }

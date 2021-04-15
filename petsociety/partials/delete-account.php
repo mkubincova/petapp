@@ -10,6 +10,6 @@ $stmt = $db->prepare($query);
 $stmt->bind_param("i", $id);
 
 if ($stmt->execute()) {
-    header("Location: /awa/petsociety/partials/logout.php");
+    header("Location: logout.php");
 }
 ?>

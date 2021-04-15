@@ -41,7 +41,7 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
 
     //if the statement was executed, redirect user to login page
     if ($stmt->execute()) {
-        header("Location: /awa/petsociety/login.php");
+        header("Location: login.php");
     } else {
         echo "<p>The registration failed, please try again.</p>";
     }

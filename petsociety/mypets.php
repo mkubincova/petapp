@@ -21,7 +21,7 @@ $max_index = count($facts_array) - 1;
     if ($facts_array) {
         $random_index = rand(0, $max_index);
         $show_fact = $facts_array[$random_index]["text"];
-        echo "<h1>$show_fact</1>";
+        echo "<h1>$show_fact</h1>";
     }
     ?>
 </main>

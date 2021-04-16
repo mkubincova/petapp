@@ -15,11 +15,9 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
         $stmt->bind_param("i", $id);
         $stmt->execute();
 
-$result = $stmt->get_result();
-$response = array();
+        $result = $stmt->get_result();
 
-//save each row of db as an object in the $response array
-while ($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch_assoc()) {
             echo "<p>Species: ";
             echo $row['species'] . "</p>";
             echo "<p>Facts: ";
@@ -30,7 +28,7 @@ while ($row = $result->fetch_assoc()) {
             echo $row['averageLifespan'] . "</p>";
             echo "<p>Forbidden Food: ";
             echo $row['forbiddenFood'] . "</p>";
-};
+        };
 
         ?>
 

@@ -45,7 +45,7 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
 
     //if user logged in, redirect them
     if ($_SESSION) {
-        header("Location: /awa/petsociety/index.php");
+        header("Location: index.php");
     } else {
         echo "<p>Your username or password is incorrect! Please try again.</p>";
     }

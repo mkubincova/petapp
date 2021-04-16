@@ -18,16 +18,11 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
         $result = $stmt->get_result();
 
         while ($row = $result->fetch_assoc()) {
-            echo "<p>Species: ";
-            echo $row['species'] . "</p>";
-            echo "<p>Facts: ";
-            echo $row['facts'] . "</p>";
-            echo "<p>Characteristics: ";
-            echo $row['characteristics'] . "</p>";
-            echo "<p>Average Lifespan: ";
-            echo $row['averageLifespan'] . "</p>";
-            echo "<p>Forbidden Food: ";
-            echo $row['forbiddenFood'] . "</p>";
+            echo "<p>Species: " . $row['species'] . "</p>";
+            echo "<p>Facts: " . $row['facts'] . "</p>";
+            echo "<p>Characteristics: " . $row['characteristics'] . "</p>";
+            echo "<p>Average Lifespan: " . $row['averageLifespan'] . "</p>";
+            echo "<p>Forbidden Food: " . $row['forbiddenFood'] . "</p>";
         };
 
     ?>

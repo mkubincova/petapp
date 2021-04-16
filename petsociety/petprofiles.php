@@ -16,7 +16,7 @@
             echo '<div>';
             echo "<a href='petprofiles-single.php?id=" . $row['petID'] . "'><img src='img/pet-profiles/" . $row['imgUrl'] . "'></a>";
             echo "<a href='petprofiles-single.php?id=" . $row['petID'] . "'>" . $row['name'] . "</a>";
-            echo 'div';
+            echo '</div>';
         };
 
     ?>

@@ -9,7 +9,7 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
 
     <div>
 
-        <?php
+    <?php
         $query = "SELECT * FROM animal WHERE animalId = ?";
         $stmt = $db->prepare($query);
         $stmt->bind_param("i", $id);
@@ -30,7 +30,7 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
             echo $row['forbiddenFood'] . "</p>";
         };
 
-        ?>
+    ?>
 
 
     </div>

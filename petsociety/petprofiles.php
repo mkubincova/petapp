@@ -2,7 +2,10 @@
 
 
 <main>
-    <!-- search field -->
+    <form method="post">
+  		<input type="text" name="search"/>
+  		<button type="submit" name="searchbutton">Search</button>
+	</form>
     <div>
 
     <?php

@@ -15,4 +15,4 @@ INSERT INTO `animal` (`animalID`, `species`, `facts`, `characteristics`, `averag
 
 /*PET*/
 INSERT INTO `pet` (`petID`, `name`, `species`, `breed`, `birthday`, `imgUrl`, `likes`, `dislikes`, `otherInformation`) VALUES (NULL, 'Leo', 'Dog', 'Golden Retriever', '2020-12-17', 'leo.jpg', 'Riding in the car and eating socks.', 'The vacuum cleaner and fireworks.', NULL),
-(NULL, 'Max', 'Cat', 'Mixed', '2018-06-14', 'max.jpg', 'Catmint and lying on the computer.', 'Travelling, being brushed.', NULL);
+(NULL, 'Charlie', 'Cat', 'Mixed', '2018-06-14', 'charlie.jpg', 'Catmint and lying on the computer.', 'Travelling, being brushed.', NULL);

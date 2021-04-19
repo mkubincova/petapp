@@ -1,6 +1,7 @@
 <?php include 'partials/header.php'; ?>
 
-<main>
+<?php if ($_SESSION) { ?>
+    <main>
 
     <a href="partials/logout.php"><button>Logout</button></a>
 
@@ -19,6 +20,10 @@
 
     <a href="partials/delete-account.php"><button>Delete account</button></a>
 </main>
+<?php } else {
+    header("Location: login.php");
+} ?>
+
 
 <?php include 'partials/footer.php'; ?>
 

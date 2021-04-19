@@ -2,7 +2,7 @@
 /* INSERT INTO commands */
 
 
-/*ANIMAL CARE*/
+/* ANIMAL CARE */
 
 INSERT INTO `animal` (`animalID`, `species`, `facts`, `characteristics`, `averageLifespan`, `forbiddenFood`, `imgUrl`) VALUES (NULL, 'Dog', 'The domestic dog (Canis familiaris or Canis lupus familiaris) is a domesticated form of wolf. The dog descended from an ancient, extinct wolf, with the modern grey wolf being the dogs nearest living relative. The dog was the first species to be domesticated by hunter–gatherers over 15,000 years ago, before the development of agriculture.', 'Dogs are known to be faithful and loyal companions, protective of their masters and territory. There are several breeds, each possessing its own characteristics.', '10–13 years', 'Alcohol, Apple Seeds, Avocado, Candy, Chewing Gum, Toothpaste & Mouthwash, Cat Food, Chocolate, Coffee, Tea, Cooked Bones, Corn On The Cob, Fat Trimmings, Garlic, Grapes & Raisins, Hops, Human Vitamins, Liver', 'animalcare-dog.jpeg'), 
 (NULL, 'Cat', 'The cat (Felis catus) is a domestic species of small carnivorous mammal. It is the only domesticated species in the family Felidae and is often referred to as the domestic cat to distinguish it from the wild members of the family. A cat can either be a house cat, a farm cat or a feral cat; the latter ranges freely and avoids human contact', 'Although every cat has its own personality, all cats have some characteristics that some people find endearing and others find off-putting. Cats can be inquisitive, friendly, playful, active, loving and independent.', '2–16 years', 'Onions and Garlic, Raw Eggs, Raw Meat & Bones, Chocolate, Caffeinated Drinks, Alcohol, Raw Dough, Milk and Dairy, Grapes and Raisins', 'animalcare-cat.jpeg'),
@@ -13,6 +13,12 @@ INSERT INTO `animal` (`animalID`, `species`, `facts`, `characteristics`, `averag
 
 
 
-/*PET*/
+/* PET */
 INSERT INTO `pet` (`petID`, `name`, `species`, `breed`, `birthday`, `imgUrl`, `likes`, `dislikes`, `otherInformation`) VALUES (NULL, 'Leo', 'Dog', 'Golden Retriever', '2020-12-17', 'leo.jpg', 'Riding in the car and eating socks.', 'The vacuum cleaner and fireworks.', NULL),
 (NULL, 'Charlie', 'Cat', 'Mixed', '2018-06-14', 'charlie.jpg', 'Catmint and lying on the computer.', 'Travelling, being brushed.', NULL);
+
+
+/* USER */
+INSERT INTO `user` (`userID`, `userType`, `username`, `password`, `firstname`, `lastname`, `email`) VALUES 
+(NULL, 'admin', 'admin', 'admin', 'Eveline', 'Ingesson', 'evelineingesson@gmail.com'), 
+(NULL, 'user', 'alex83', 'alex83', 'Alexandra', 'Nilsson', 'alexandranilsson@gmail.com');

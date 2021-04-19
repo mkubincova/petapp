@@ -3,6 +3,14 @@
     <main>
         <div>
             <?php
+            if ($_SESSION["userType"] == 'admin') {
+                echo '<form method="post"><button type="submit" name="addbtn">Add Animal</button></form>';
+            }
+
+            if (isset($_POST['addbtn'])) {
+                header("Location: animalcare-add.php");
+            }
+
             $query = "SELECT * FROM animal";
             $stmt = $db->prepare($query);
             $stmt->execute();

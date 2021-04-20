@@ -10,12 +10,31 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
 
         <div>
 
-            <?php
-            $query = "SELECT * FROM animal WHERE animalId = ?";
+        <?php
+            if ($_SESSION["userType"] == 'admin') {
+                echo '<form method="post"><button type="submit" name="editbtn">Edit Animal</button></form>';
+                echo '<form method="post"><button type="submit" name="deletebtn">Delete Animal</button></form>';
+
+            }
+
+
+            if (isset($_POST['editbtn'])) {
+                header("Location: animalcare-edit.php?id=" . $id);
+            } else if (isset($_POST['deletebtn'])) {
+                $query = "DELETE FROM animal WHERE animalID = ?";
+                $stmt = $db->prepare($query);
+                $stmt->bind_param("i", $id);
+
+                if ($stmt->execute()) {
+                    echo "The animal has been deleted.";
+                }
+            }
+            
+    
+            $query = "SELECT * FROM animal WHERE animalID = ?";
             $stmt = $db->prepare($query);
             $stmt->bind_param("i", $id);
             $stmt->execute();
-
             $result = $stmt->get_result();
 
             while ($row = $result->fetch_assoc()) {
@@ -26,7 +45,7 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
                 echo "<p>Forbidden Food: " . $row['forbiddenFood'] . "</p>";
             };
 
-            ?>
+        ?>
 
 
         </div>

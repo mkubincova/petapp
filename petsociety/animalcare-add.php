@@ -2,7 +2,7 @@
 
 <?php if ($_SESSION && $_SESSION["userType"] == 'admin') { ?>
     <main>
-        <!-- Is missing a file upload -->
+        <!-- Is missing file upload -->
         <form method="post">
             <label>Species</label><br>
             <input name="species" type="text"><br>

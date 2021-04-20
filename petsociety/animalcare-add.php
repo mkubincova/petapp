@@ -43,7 +43,7 @@
             $species = htmlspecialchars($species, ENT_QUOTES, 'UTF-8');
             $facts = htmlspecialchars($facts, ENT_QUOTES, 'UTF-8');
             $characteristics = htmlspecialchars($characteristics, ENT_QUOTES, 'UTF-8');
-            $averageLifespan = filter_var($averageLifespan, FILTER_SANITIZE_EMAIL);
+            $averageLifespan = htmlspecialchars($averageLifespan, ENT_QUOTES, 'UTF-8');
             $forbiddenFood = htmlspecialchars($forbiddenFood, ENT_QUOTES, 'UTF-8');
 
             //Add animal in db

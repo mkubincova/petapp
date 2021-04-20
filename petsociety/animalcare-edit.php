@@ -49,7 +49,6 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
 
 <?php
 
-
     if (isset($_POST["savebtn"])) {
 
         //Get form data

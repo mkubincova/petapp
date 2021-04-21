@@ -54,19 +54,10 @@
             echo "<p>Posted by " . $row['user_username'] . "</p>";
             echo "<p>" . $row['post_timestamp'] . "</p>";
             echo "<form method='post'><textarea name='text' type='text'></textarea><br>";
-            echo "<button name='commentbtn" . $row['post_postID'] . "'>Comment</button></form>";
+            echo "<button name='commentbtn'>Comment</button></form>";
             echo "<p>" . $row['comment_text'] . "</p>";
         }
 
-        $query = "SELECT comment.commentID, user.username
-        FROM comment
-        INNER JOIN user ON comment.userID=user.userID";
-                $stmt = $db->prepare($query);
-                $stmt->execute();
-                $result = $stmt->get_result();
-                while ($row = $result->fetch_assoc()) {
-                    echo $row['username'];
-                }
 
     ?>
 

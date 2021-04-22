@@ -68,6 +68,4 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
     }
 
     $stmt->close();
-} else {
-    echo "<p>You have to set username and password</p>";
-}; ?>
+};?>

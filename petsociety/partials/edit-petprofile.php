@@ -63,7 +63,7 @@ if (isset($_POST['name']) && isset($_POST['species'])) {
         if ($stmt->execute()) {
 
             $stmt->close(); //close statement
-            header("Location: ../mypets.php");
+            header("Location: ../petprofiles-single.php?id=$id");
             
         } else {
             echo "<p>There was an error processing your request, please try again.</p>";

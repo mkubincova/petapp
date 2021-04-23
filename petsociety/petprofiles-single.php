@@ -64,7 +64,6 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
                     echo "<input type='hidden' value='" . $imgUrl . "' name='oldimg' />";
                     echo "<input type='hidden' value='" . $petId . "' name='petId' />";
                 }
-                
             };
 
             //only visible when editing
@@ -85,6 +84,27 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
 
             ?>
         </div>
+
+        <?php if ($owner == $_SESSION['userId']) { ?>
+            <div>
+                <h3>Does this pet have more owners?</h3>
+                <p>Add them here using their email addresses:</p>
+                <form action='partials/add-owner.php' method="POST">
+                    <input type="hidden" name="petId" value="<?php echo $petId ?>">
+                    <input type="email" name="new-owner" placeholder="another@owner.com">
+                    <input type="submit" value="Add owner">
+                </form>
+            </div>
+
+            <div>
+                <h3>This is not my pet!</h3>
+                <form action='partials/delete-owner.php' method="POST">
+                    <input type="hidden" name="petId" value="<?php echo $petId ?>">
+                    <input type="hidden" name="userId" value="<?php echo $owner ?>">
+                    <input type="submit" value="Delete from My pets">
+                </form>
+            </div>
+        <?php } ?>
     </main>
 <?php } else {
     header("Location: login.php");

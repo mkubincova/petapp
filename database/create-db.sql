@@ -26,10 +26,12 @@ CREATE TABLE `petsociety`.`pet` (
     PRIMARY KEY (`petID`)) ENGINE = InnoDB;
 
 CREATE TABLE `petsociety`.`user_pet` (
+    `user_petID` INT(11) NOT NULL,
     `userID` INT(11) NOT NULL,
     `petID` INT(11) NOT NULL,
     FOREIGN KEY (userID) REFERENCES user(userID),
-    FOREIGN KEY (petID) REFERENCES pet(petID)
+    FOREIGN KEY (petID) REFERENCES pet(petID),
+    PRIMARY KEY (`user_petID`)) ENGINE = InnoDB;
 );
 
 CREATE TABLE `petsociety`.`animal` ( 

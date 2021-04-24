@@ -4,7 +4,7 @@ include '../configurations/config.php';
 include '../configurations/db-connection.php';
 
 
-if (isset($_POST['name']) && isset($_POST['species'])) {
+if (!empty($_POST['name']) && !empty($_POST['species'])) {
 
     //get & sanitize the form data
     $name = htmlspecialchars($_POST['name']);

@@ -15,7 +15,7 @@
 
 <?php
 //check if they filled at least username and password
-if (isset($_POST["username"]) && isset($_POST["password"])) {
+if (!empty($_POST["username"]) && !empty($_POST["password"])) {
 
     //get form data
     $username = $_POST['username'];
@@ -47,6 +47,8 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
     }
 
     $stmt->close();
+} else {
+    echo "<p>You have to set a username and password.</p>";
 }; ?>
 
 <?php include "partials/footer.php" ?>

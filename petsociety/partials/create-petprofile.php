@@ -3,7 +3,7 @@ include 'img-upload.php';
 include '../configurations/config.php';
 include '../configurations/db-connection.php';
 
-if (isset($_POST['name']) && isset($_POST['species']) && $_FILES['img']['name'] !== '') {
+if (!empty($_POST['name']) && !empty($_POST['species']) && $_FILES['img']['name'] !== '') {
    
     //save img to img folder & send back location or error
     $imgUrl = uploadImg($_FILES['img'], 'pet-profiles');
@@ -56,8 +56,6 @@ if (isset($_POST['name']) && isset($_POST['species']) && $_FILES['img']['name'] 
 
         
     }
-
-    
  
 } else {
     echo "<p>You need to submit at least name, species and profile picture!</p>";

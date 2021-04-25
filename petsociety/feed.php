@@ -1,4 +1,7 @@
-<?php include 'partials/header.php'; ?>
+<?php 
+    include 'partials/header.php'; 
+    include 'partials/img-upload.php'
+?>
 
 <?php if ($_SESSION) { ?>
     <main>
@@ -14,6 +17,64 @@
     } ?>
 
     <?php
+
+
+        //Get all data from comments and save in array
+
+        $comments = array();
+
+        $query = "SELECT comment.commentid AS commentID, comment.postID AS comment_postID, comment.userID AS comment_userID, comment.text AS text, comment.timestamp AS timestamp, user.userID AS user_userID, user.username AS username
+        FROM comment
+        INNER JOIN user ON comment.userID = user.userID";
+
+        $stmt = $db->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        while ($row = $result->fetch_assoc()) {
+            $comments[] = $row;
+        }
+
+        $stmt->close();
+
+
+
+        //Fetch & display all data from post and comment
+
+        $postIdArray = array();
+
+        $query = "SELECT post.postID AS postID, post.text AS text, post.timestamp AS timestamp, user.userID AS userID, user.username AS username
+        FROM post
+        INNER JOIN user ON post.userID = user.userID
+        ORDER BY post.postID DESC";
+
+        $stmt = $db->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        while ($row = $result->fetch_assoc()) {
+            echo "<p>" . $row['text'] . "</p>";
+            echo "<p>Posted by " . $row['username'] . "</p>";
+            echo "<p>" . $row['timestamp'] . "</p>";
+
+            foreach ($comments as $comment) {
+                if ($comment['comment_postID'] == $row['postID']) {
+                    echo "<p>" . $comment['text'] . "</p>";
+                    echo "<p>Posted by " . $comment['username'] . "</p>";
+                    echo "<p>" . $comment['timestamp'] . "</p>";
+                    
+                }
+            }
+
+            echo "<form method='post'><textarea name='commenttext' type='text'></textarea><br>";
+            echo "<button name='commentbtn" . $row['postID'] . "'>Comment</button></form>";
+
+            $postIdArray[] = $row['postID'];
+
+        }
+
+        $stmt->close();
+
 
         //Add new post
         if (isset($_POST["postbtn"])) {
@@ -38,24 +99,33 @@
             }
         }
 
-        //Fetch all posts & comments and display
-        $query = "SELECT post.postID AS post_postid, post.text AS post_text, post.timestamp AS post_timestamp, user.userID AS user_userid, user.username AS user_username, comment.postID AS comment_postid, comment.userID AS comment_userid, comment.text AS comment_text, comment.timestamp AS comment_timestamp
-        FROM post
-        INNER JOIN user ON post.userID = user.userID
-        LEFT JOIN comment ON post.postID = comment.postID
-        ORDER BY post.postID DESC";
 
-        $stmt = $db->prepare($query);
-        $stmt->execute();
-        $result = $stmt->get_result();
+        //Add new comment
 
-        while ($row = $result->fetch_assoc()) {
-            echo "<p>" . $row['post_text'] . "</p>";
-            echo "<p>Posted by " . $row['user_username'] . "</p>";
-            echo "<p>" . $row['post_timestamp'] . "</p>";
-            echo "<form method='post'><textarea name='text' type='text'></textarea><br>";
-            echo "<button name='commentbtn'>Comment</button></form>";
-            echo "<p>" . $row['comment_text'] . "</p>";
+        foreach ($postIdArray as $postID) {
+
+            if (isset($_POST["commentbtn" . $postID])) {
+                if (!empty($_POST["commenttext"])) {
+    
+                    $text = $_POST['commenttext'];
+    
+                    $text = htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
+    
+                    $query = "INSERT INTO comment (text, postID, userID) VALUES (?, ?, ?)";
+                    $stmt = $db->prepare($query);
+                    $stmt->bind_param("sii", $text, $postID, $_SESSION['userId']);
+                    
+                    if ($stmt->execute()) {
+                        header("Location: feed.php");
+                    }
+                    
+                    $stmt->close();
+                    
+                } else {
+                    echo "Please write something to publish the post.";
+                }
+            }
+
         }
 
 

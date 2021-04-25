@@ -51,7 +51,7 @@
             $stmt = $db->prepare($query);
             $stmt->bind_param("sssss", $species, $facts, $characteristics, $averageLifespan, $forbiddenFood);
             if($stmt->execute()){
-                echo "The animal has been added.";
+                header("Location: animalcare.php");
             }
 
             $stmt->close();

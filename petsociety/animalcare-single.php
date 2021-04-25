@@ -26,7 +26,7 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
                 $stmt->bind_param("i", $id);
 
                 if ($stmt->execute()) {
-                    echo "The animal has been deleted.";
+                    header("Location: animalcare.php");
                 }
             }
             
@@ -38,6 +38,7 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
             $result = $stmt->get_result();
 
             while ($row = $result->fetch_assoc()) {
+                echo "<img src='img/animal-care/" . $row['imgUrl'] . "'>";
                 echo "<p>Species: " . $row['species'] . "</p>";
                 echo "<p>Facts: " . $row['facts'] . "</p>";
                 echo "<p>Characteristics: " . $row['characteristics'] . "</p>";

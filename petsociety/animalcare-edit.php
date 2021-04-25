@@ -74,7 +74,7 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
         $stmt->bind_param("sssssi", $speciesInput, $factsInput, $characteristicsInput, $averageLifespanInput, $forbiddenFoodInput, $id);
         
         if ($stmt->execute()) {
-            header("Location: animalcare-edit.php?id=" . $id);
+            header("Location: animalcare.php");
         } else {
             echo "<p>Editing failed, please try again.</p>";
         }

@@ -19,7 +19,7 @@
     <?php
 
 
-        //Get all data from comments and save in array
+        //Get data from comment & user table and save in array
 
         $comments = array();
 

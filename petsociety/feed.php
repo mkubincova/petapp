@@ -43,7 +43,7 @@
 
         $postIdArray = array();
 
-        $query = "SELECT post.postID AS postID, post.text AS text, post.timestamp AS timestamp, user.userID AS userID, user.username AS username
+        $query = "SELECT post.postID AS postID, post.userID AS post_userID, post.text AS text, post.timestamp AS timestamp, user.userID AS userID, user.username AS username
         FROM post
         INNER JOIN user ON post.userID = user.userID
         ORDER BY post.postID DESC";
@@ -53,23 +53,31 @@
         $result = $stmt->get_result();
 
         while ($row = $result->fetch_assoc()) {
+            $postIdArray[] = $row['postID'];
+
             echo "<p>" . $row['text'] . "</p>";
             echo "<p>Posted by " . $row['username'] . "</p>";
             echo "<p>" . $row['timestamp'] . "</p>";
+
+            if ($row['post_userID'] == $_SESSION['userId'] || $_SESSION['username'] == 'admin') {
+                echo '<form method="post"><button name="deletepost' . $row['postID'] . '">Delete this post</button></form>';
+            }
 
             foreach ($comments as $comment) {
                 if ($comment['comment_postID'] == $row['postID']) {
                     echo "<p>" . $comment['text'] . "</p>";
                     echo "<p>Posted by " . $comment['username'] . "</p>";
                     echo "<p>" . $comment['timestamp'] . "</p>";
+
+                    if ($comment['comment_userID'] == $_SESSION['userId'] || $_SESSION['username'] == 'admin') {
+                        echo '<form method="post"><button name="deletecomment' . $comment['commentID'] . '">Delete this comment</button></form>';
+                    }
                     
                 }
             }
 
             echo "<form method='post'><textarea name='commenttext' type='text'></textarea><br>";
             echo "<button name='commentbtn" . $row['postID'] . "'>Comment</button></form>";
-
-            $postIdArray[] = $row['postID'];
 
         }
 
@@ -100,8 +108,31 @@
         }
 
 
-        //Add new comment
+        //Delete post
+        foreach ($postIdArray as $postID) {
+            if (isset($_POST["deletepost" . $postID])) {
+                $query = "DELETE FROM comment WHERE postID = ?";
+                $stmt = $db->prepare($query);
+                $stmt->bind_param("i", $postID);
+                
+                $stmt->execute();
+                $stmt->close();
 
+                $query2 = "DELETE FROM post WHERE postID = ?";
+                $stmt2 = $db->prepare($query2);
+                $stmt2->bind_param("i", $postID);
+                
+                if ($stmt2->execute()) {
+                    header("Location: feed.php");
+                }
+
+                $stmt2->close();
+            }
+
+        }
+
+
+        //Add new comment
         foreach ($postIdArray as $postID) {
 
             if (isset($_POST["commentbtn" . $postID])) {
@@ -125,7 +156,23 @@
                     echo "Please write something to publish the post.";
                 }
             }
+        }
 
+
+        //Delete comment
+        foreach ($comments as $comment) {
+
+            if (isset($_POST["deletecomment" . $comment['commentID']])) {
+                $query = "DELETE FROM comment WHERE commentID = ?";
+                $stmt = $db->prepare($query);
+                $stmt->bind_param("i", $comment['commentID']);
+
+                if ($stmt->execute()) {
+                    header("Location: feed.php");
+                }
+
+                $stmt->close();
+            }
         }
 
 

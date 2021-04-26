@@ -1,12 +1,15 @@
-<?php include 'partials/header.php'; ?>
+<?php 
+    include 'partials/header.php'; 
+    include 'partials/img-upload.php';
+?>
 
 <?php if ($_SESSION && $_SESSION["userType"] == 'admin') { ?>
     <main>
-        <!-- Is missing file upload -->
-        <form method="post">
-            <label>Species</label><br>
+        <!-- Add file upload -->
+        <form method="post" enctype="multipart/form-data">
+            <label>Species*</label><br>
             <input name="species" type="text"><br>
-            <label>Facts</label><br>
+            <label>Facts*</label><br>
             <input name="facts" type="text"><br>
             <label>Characteristics</label><br>
             <input name="characteristics" type="text"><br>
@@ -14,6 +17,8 @@
             <input name="averagelifespan" type="text"><br>
             <label>Forbidden food</label><br>
             <input name="forbiddenfood" type="text"><br>
+            <label>Profile picture* (must be jpg/jpeg/png and under 5MB)</label><br>
+            <input name="img" type="file"><br>
             <input type="submit" name="addbtn" value="Add Animal">
         </form>
 
@@ -23,41 +28,53 @@
 }  ?>
 
 
-<?php include 'partials/footer.php'; ?>
-
-
 <?php
 
     if (isset($_POST["addbtn"])) {
-        // Image must also be required here
-        if (!empty($_POST["species"]) && !empty($_POST["facts"])) {
+        // Image is also required
+        if (!empty($_POST["species"]) && !empty($_POST["facts"]) && $_FILES['img']['name'] !== '') {
 
-            //Get form data
-            $species = $_POST['species'];
-            $facts = $_POST['facts'];
-            $characteristics = $_POST['characteristics'];
-            $averageLifespan = $_POST['averagelifespan'];
-            $forbiddenFood = $_POST['forbiddenfood'];
+            //save img to img folder & send back location or error
+            $imgUrl = uploadImg($_FILES['img'], 'animal-care');
 
-            //Sanitize data
-            $species = htmlspecialchars($species, ENT_QUOTES, 'UTF-8');
-            $facts = htmlspecialchars($facts, ENT_QUOTES, 'UTF-8');
-            $characteristics = htmlspecialchars($characteristics, ENT_QUOTES, 'UTF-8');
-            $averageLifespan = htmlspecialchars($averageLifespan, ENT_QUOTES, 'UTF-8');
-            $forbiddenFood = htmlspecialchars($forbiddenFood, ENT_QUOTES, 'UTF-8');
+            //check if the img was saved, if yes continue saving data to db
+            if (substr($imgUrl, 0, 5) == 'Error') {
 
-            //Add animal in db
-            $query = "INSERT INTO animal (species, facts, characteristics, averageLifespan, forbiddenFood) VALUES (?, ?, ?, ?, ?)";
-            $stmt = $db->prepare($query);
-            $stmt->bind_param("sssss", $species, $facts, $characteristics, $averageLifespan, $forbiddenFood);
-            if($stmt->execute()){
-                header("Location: animalcare.php");
+                echo $imgUrl; //Error: Your image is too big!
+
+            } else {
+
+                //Get form data
+                $species = $_POST['species'];
+                $facts = $_POST['facts'];
+                $characteristics = $_POST['characteristics'];
+                $averageLifespan = $_POST['averagelifespan'];
+                $forbiddenFood = $_POST['forbiddenfood'];
+
+                //Sanitize data
+                $species = htmlspecialchars($species, ENT_QUOTES, 'UTF-8');
+                $facts = htmlspecialchars($facts, ENT_QUOTES, 'UTF-8');
+                $characteristics = htmlspecialchars($characteristics, ENT_QUOTES, 'UTF-8');
+                $averageLifespan = htmlspecialchars($averageLifespan, ENT_QUOTES, 'UTF-8');
+                $forbiddenFood = htmlspecialchars($forbiddenFood, ENT_QUOTES, 'UTF-8');
+
+                //Add animal in db
+                $query = "INSERT INTO animal (species, facts, characteristics, averageLifespan, forbiddenFood, imgUrl) VALUES (?, ?, ?, ?, ?, ?)";
+                $stmt = $db->prepare($query);
+                $stmt->bind_param("ssssss", $species, $facts, $characteristics, $averageLifespan, $forbiddenFood, $imgUrl);
+                if($stmt->execute()){
+                    header("Location: animalcare.php");
+
+                }
+                
+                $stmt->close();
             }
-
-            $stmt->close();
         } else {
-            echo "The animal couldn't be added. Please fill in species and facts.";
+            echo "The animal couldn't be added. Please fill in species, facts and add an image.";
         }
     }
     
 ?>
+
+
+<?php include 'partials/footer.php'; ?>

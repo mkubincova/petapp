@@ -35,7 +35,7 @@
         if (!empty($_POST["species"]) && !empty($_POST["facts"]) && $_FILES['img']['name'] !== '') {
 
             //save img to img folder & send back location or error
-            $imgUrl = uploadImg($_FILES['img'], 'animal-care');
+            $imgUrl = uploadImg($_FILES['img'], 'animal-care', false);
 
             //check if the img was saved, if yes continue saving data to db
             if (substr($imgUrl, 0, 5) == 'Error') {

@@ -1,6 +1,6 @@
 <?php
 
-function uploadImg ($file, $imgfolder){
+function uploadImg ($file, $imgfolder, $dots){
 
     //get properties of $file array as variables
     $fileName = $file['name'];
@@ -30,7 +30,12 @@ function uploadImg ($file, $imgfolder){
                 $fileNameNew = uniqid('', true) . "." . $fileActualExt; //based on current time
 
                 //choose a file destination and move it from its temporary location
-                $fileDestination = '../img/' . $imgfolder . '/' . $fileNameNew;
+                if ($dots) {
+                    $fileDestination = '../img/' . $imgfolder . '/' . $fileNameNew;
+                } else {
+                    $fileDestination = 'img/' . $imgfolder . '/' . $fileNameNew;
+                }
+                
                 move_uploaded_file($fileTmpName, $fileDestination);
 
                 return $imgfolder . '/' . $fileNameNew;

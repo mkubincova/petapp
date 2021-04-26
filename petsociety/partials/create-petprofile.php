@@ -6,7 +6,7 @@ include '../configurations/db-connection.php';
 if (!empty($_POST['name']) && !empty($_POST['species']) && $_FILES['img']['name'] !== '') {
    
     //save img to img folder & send back location or error
-    $imgUrl = uploadImg($_FILES['img'], 'pet-profiles');
+    $imgUrl = uploadImg($_FILES['img'], 'pet-profiles', true);
 
     //check if the img was saved, if yes continue saving data to db
     if (substr($imgUrl, 0, 5) == 'Error') {

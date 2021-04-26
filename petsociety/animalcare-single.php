@@ -3,7 +3,10 @@
 $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
 ?>
 
-<?php include 'partials/header.php'; ?>
+<?php include 'partials/header.php';
+        include 'partials/img-upload.php';
+
+?>
 
 <?php if ($_SESSION) { ?>
     <main>
@@ -16,6 +19,7 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
                 echo '<form method="post"><button type="submit" name="deletebtn">Delete Animal</button></form>';
 
             }
+
 
 
             if (isset($_POST['editbtn'])) {
@@ -38,7 +42,7 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
             $result = $stmt->get_result();
 
             while ($row = $result->fetch_assoc()) {
-                echo "<img src='img/animal-care/" . $row['imgUrl'] . "'>";
+                echo "<img src='img/" . $row['imgUrl'] . "'>";
                 echo "<p>Species: " . $row['species'] . "</p>";
                 echo "<p>Facts: " . $row['facts'] . "</p>";
                 echo "<p>Characteristics: " . $row['characteristics'] . "</p>";

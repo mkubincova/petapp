@@ -22,7 +22,7 @@ if (!empty($_POST['name']) && !empty($_POST['species'])) {
     if ($_FILES['newimg']['name'] !== '') {
 
         //validate and save the image in img folder
-        $imgUrl = uploadImg($_FILES['newimg'], 'pet-profiles');
+        $imgUrl = uploadImg($_FILES['newimg'], 'pet-profiles', true);
 
         //if the img was saved continue saving data to db otherwise display error
         if (substr($imgUrl, 0, 5) == 'Error') {

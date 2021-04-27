@@ -6,7 +6,6 @@
 <?php if ($_SESSION) { ?>
     <main>
         <form method="post" enctype="multipart/form-data">
-            <!-- Image upload is missing -->
             <textarea name="text" type="text"></textarea><br>
             <input name="img" type="file"><br>
             <input type="submit" name="postbtn" value="Post">

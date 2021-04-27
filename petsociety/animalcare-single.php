@@ -3,7 +3,10 @@
 $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
 ?>
 
-<?php include 'partials/header.php'; ?>
+<?php include 'partials/header.php';
+        include 'partials/img-upload.php';
+
+?>
 
 <?php if ($_SESSION) { ?>
     <main>
@@ -16,6 +19,7 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
                 echo '<form method="post"><button class="delete" type="submit" name="deletebtn">Delete Animal</button></form>';
 
             }
+
 
 
             if (isset($_POST['editbtn'])) {

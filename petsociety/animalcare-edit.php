@@ -48,6 +48,19 @@
 <?php
 
     if (isset($_POST["savebtn"])) {
+        //Get form data
+        $speciesInput = $_POST['species'];
+        $factsInput = $_POST['facts'];
+        $characteristicsInput = $_POST['characteristics'];
+        $averageLifespanInput = $_POST['averagelifespan'];
+        $forbiddenFoodInput = $_POST['forbiddenfood'];
+        //Sanitize data
+        $speciesInput = htmlspecialchars($speciesInput, ENT_QUOTES, 'UTF-8');
+        $factsInput = htmlspecialchars($factsInput, ENT_QUOTES, 'UTF-8');
+        $characteristicsInput = htmlspecialchars($characteristicsInput, ENT_QUOTES, 'UTF-8');
+        $averageLifespanInput = htmlspecialchars($averageLifespanInput, ENT_QUOTES, 'UTF-8');
+        $forbiddenFoodInput = htmlspecialchars($forbiddenFoodInput, ENT_QUOTES, 'UTF-8');
+        
         //save img to img folder & send back location or error
         if ($_FILES['img']['name'] !== '') {
             $imgUrl = uploadImg($_FILES['img'], 'animal-care', false);
@@ -58,21 +71,6 @@
                 echo $imgUrl; //Error: Your image is too big!
     
             } else {
-    
-                //Get form data
-                $speciesInput = $_POST['species'];
-                $factsInput = $_POST['facts'];
-                $characteristicsInput = $_POST['characteristics'];
-                $averageLifespanInput = $_POST['averagelifespan'];
-                $forbiddenFoodInput = $_POST['forbiddenfood'];
-    
-                //Sanitize data
-                $speciesInput = htmlspecialchars($speciesInput, ENT_QUOTES, 'UTF-8');
-                $factsInput = htmlspecialchars($factsInput, ENT_QUOTES, 'UTF-8');
-                $characteristicsInput = htmlspecialchars($characteristicsInput, ENT_QUOTES, 'UTF-8');
-                $averageLifespanInput = htmlspecialchars($averageLifespanInput, ENT_QUOTES, 'UTF-8');
-                $forbiddenFoodInput = htmlspecialchars($forbiddenFoodInput, ENT_QUOTES, 'UTF-8');
-    
 
                 //Update animal in db
                 $query = "UPDATE animal 
@@ -91,15 +89,16 @@
             }    
 
             } else {
-                $query2 = "UPDATE animal 
+                
+                $query = "UPDATE animal 
                 SET species = ?, facts = ?, characteristics = ?, averageLifespan = ?, forbiddenFood = ?
                 WHERE animalID = ?";
             
-                $stmt2 = $db->prepare($query2);
-                $stmt2->bind_param("sssssi", $speciesInput, $factsInput, $characteristicsInput, $averageLifespanInput, $forbiddenFoodInput, $id);
+                $stmt = $db->prepare($query);
+                $stmt->bind_param("sssssi", $speciesInput, $factsInput, $characteristicsInput, $averageLifespanInput, $forbiddenFoodInput, $id);
 
-                if ($stmt2->execute()) {
-                    $stmt2->close();
+                if ($stmt->execute()) {
+                    $stmt->close();
                     header("Location: animalcare.php");
                     
                 } else {

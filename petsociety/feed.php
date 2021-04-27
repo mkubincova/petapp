@@ -55,7 +55,7 @@
 
         while ($row = $result->fetch_assoc()) {
             $postIdArray[] = $row['postID'];
-
+            
             echo "<p>" . $row['text'] . "</p>";
             if ($row['imgUrl'] !== NULL) {
                 echo "<img src='img/" . $row['imgUrl'] . "'/>";
@@ -92,7 +92,7 @@
         if (isset($_POST["postbtn"])) {
             if (!empty($_POST["text"])) {
 
-                if (file_exists($_FILES['img']['tmp_name']) || is_uploaded_file($_FILES['img']['tmp_name'])) {
+                if ($_FILES['img']['name'] !== '') {
 
                     //save img to img folder & send back location or error
                     $imgUrl = uploadImg($_FILES['img'], 'feed', false);
@@ -124,7 +124,7 @@
 
                     $text = htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
 
-                    $query = "INSERT INTO post (text, userID VALUES (?, ?)";
+                    $query = "INSERT INTO post (text, userID) VALUES (?, ?)";
                     $stmt = $db->prepare($query);
                     $stmt->bind_param("si", $text, $_SESSION['userId']);
                     
@@ -146,6 +146,7 @@
         //Delete post
         foreach ($postIdArray as $postID) {
             if (isset($_POST["deletepost" . $postID])) {
+                //Delete from comment table
                 $query = "DELETE FROM comment WHERE postID = ?";
                 $stmt = $db->prepare($query);
                 $stmt->bind_param("i", $postID);
@@ -153,15 +154,30 @@
                 $stmt->execute();
                 $stmt->close();
 
-                $query2 = "DELETE FROM post WHERE postID = ?";
-                $stmt2 = $db->prepare($query2);
-                $stmt2->bind_param("i", $postID);
+                //Select the imgUrl in order to unlink the image
+                $query = "SELECT * FROM post WHERE postID = ?";
+                $stmt = $db->prepare($query);
+                $stmt->bind_param("i", $postID);
+                $stmt->execute();
+                $result = $stmt->get_result();
+    
+                while ($row = $result->fetch_assoc()) {
+                    $imgUrl = $row['imgUrl'];
+                };
+
+                $stmt->close();
+
+                //Delete from post table and unlink image
+                $query = "DELETE FROM post WHERE postID = ?";
+                $stmt = $db->prepare($query);
+                $stmt->bind_param("i", $postID);
                 
-                if ($stmt2->execute()) {
+                if ($stmt->execute()) {
+                    unlink('img/' . $imgUrl);
                     header("Location: feed.php");
                 }
 
-                $stmt2->close();
+                $stmt->close();
             }
 
         }

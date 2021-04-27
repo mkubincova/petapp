@@ -3,7 +3,7 @@ include 'partials/img-upload.php';?>
 
 <?php
 //API implementation
-$facts_url = "http://localhost/petapp/api/facts.php";
+$facts_url = "http://localhost/awa/api/facts.php";
 
 $client = curl_init($facts_url);
 curl_setopt($client, CURLOPT_RETURNTRANSFER, true); //return transfer as a string
@@ -31,22 +31,24 @@ $stmt->execute();
 
 <?php if ($_SESSION) { ?>
     <main>
-        <h3>Did you know?</h3>
+        <h5>Did you know?</h5>
 
         <?php
         //if there is a fact array, display random fact from it
         if ($facts_array) {
             $random_index = rand(0, $max_index);
             $show_fact = $facts_array[$random_index]["text"];
-            echo "<h2>$show_fact</h2>";
+            echo "<h2 class='fact'>$show_fact</h2>";
         }
 
         echo "<h1>My pets</h1>";
-        echo "<a href='newpet.php'><button>Add pet</button></a>";
+        echo "<a href='newpet.php'><button>Add pet</button></a><br>";
+        echo "<div class='pet-container'>";
         while ($stmt->fetch()) {
             echo "<a href='petprofiles-single.php?id=$id'><img src='img/$imgUrl'></a>";
         }
         ?>
+        </div>
     </main>
 <?php } else {
     header("Location: login.php");

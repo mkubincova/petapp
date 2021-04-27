@@ -6,7 +6,7 @@
     <a href="partials/logout.php"><button>Logout</button></a>
 
     <!--will have a function to toggle disabled attribute & show "save changes" button-->
-    <button>Edit</button>
+    <button class="edit">Edit</button>
 
     <form action="" method="post">
         <input name="username" type="text" value="<?php echo $_SESSION["username"] ?>"><br>
@@ -18,7 +18,7 @@
         <input type="submit" value="Save changes">
     </form>
 
-    <a href="partials/delete-account.php"><button>Delete account</button></a>
+    <a href="partials/delete-account.php"><button class="delete">Delete account</button></a>
 </main>
 <?php } else {
     header("Location: login.php");

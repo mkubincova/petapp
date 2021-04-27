@@ -7,7 +7,7 @@
             <button type="submit" name="searchbutton">Search</button>
             <button type="submit" name="showall">All pets</button>
         </form>
-        <div>
+        <div class="pet-container">
 
             <?php
 

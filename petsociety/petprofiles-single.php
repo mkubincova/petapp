@@ -78,8 +78,8 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
             if (in_array($_SESSION['userId'], $owners)) {
                 $owner = $_SESSION['userId'];
                 //show options to manipulate the 
-                echo "<button>Edit</button>";
-                echo "<a href='partials/delete-petprofile.php?id=$petId&img=$imgUrl'><button>Delete this profile</button></a>";
+                echo "<button class='edit'>Edit</button>";
+                echo "<a href='partials/delete-petprofile.php?id=$petId&img=$imgUrl'><button class='delete'>Delete this profile</button></a>";
             }
 
             ?>
@@ -101,7 +101,7 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
                 <form action='partials/delete-owner.php' method="POST">
                     <input type="hidden" name="petId" value="<?php echo $petId ?>">
                     <input type="hidden" name="userId" value="<?php echo $owner ?>">
-                    <input type="submit" value="Delete from My pets">
+                    <input type="submit" value="Delete from My pets" class="delete">
                 </form>
             </div>
         <?php } ?>

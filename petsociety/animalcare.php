@@ -16,10 +16,12 @@
             $stmt->execute();
             $result = $stmt->get_result();
 
+            echo"<div class='pet-container'>";
             while ($row = $result->fetch_assoc()) {
                 echo "<a href='animalcare-single.php?id=" . $row['animalID'] . "'><img src='img/" . $row['imgUrl'] . "'></a>";
             };
             ?>
+            </div>
         </div>
     </main>
 <?php } else {

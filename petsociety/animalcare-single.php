@@ -15,8 +15,8 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
 
         <?php
             if ($_SESSION["userType"] == 'admin') {
-                echo '<form method="post"><button type="submit" name="editbtn">Edit Animal</button></form>';
-                echo '<form method="post"><button type="submit" name="deletebtn">Delete Animal</button></form>';
+                echo '<form method="post"><button class="edit" type="submit" name="editbtn">Edit Animal</button></form>';
+                echo '<form method="post"><button class="delete" type="submit" name="deletebtn">Delete Animal</button></form>';
 
             }
 

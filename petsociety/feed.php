@@ -64,7 +64,7 @@
             echo "<p>" . $row['timestamp'] . "</p>";
 
             if ($row['post_userID'] == $_SESSION['userId'] || $_SESSION['username'] == 'admin') {
-                echo '<form method="post"><button name="deletepost' . $row['postID'] . '">Delete this post</button></form>';
+                echo '<form method="post"><button class="delete btn-small" name="deletepost' . $row['postID'] . '">Delete this post</button></form>';
             }
 
             foreach ($comments as $comment) {
@@ -74,7 +74,7 @@
                     echo "<p>" . $comment['timestamp'] . "</p>";
 
                     if ($comment['comment_userID'] == $_SESSION['userId'] || $_SESSION['username'] == 'admin') {
-                        echo '<form method="post"><button name="deletecomment' . $comment['commentID'] . '">Delete this comment</button></form>';
+                        echo '<form method="post"><button class="delete btn-small" name="deletecomment' . $comment['commentID'] . '">Delete this comment</button></form>';
                     }
                     
                 }

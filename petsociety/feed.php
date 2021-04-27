@@ -1,13 +1,14 @@
 <?php 
     include 'partials/header.php'; 
-    include 'partials/img-upload.php'
+    include 'partials/img-upload.php';
 ?>
 
 <?php if ($_SESSION) { ?>
     <main>
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <!-- Image upload is missing -->
             <textarea name="text" type="text"></textarea><br>
+            <input name="img" type="file"><br>
             <input type="submit" name="postbtn" value="Post">
         </form>
         
@@ -43,7 +44,7 @@
 
         $postIdArray = array();
 
-        $query = "SELECT post.postID AS postID, post.userID AS post_userID, post.text AS text, post.timestamp AS timestamp, user.userID AS userID, user.username AS username
+        $query = "SELECT post.postID AS postID, post.userID AS post_userID, post.text AS text, post.timestamp AS timestamp, post.imgUrl AS imgUrl, user.userID AS userID, user.username AS username
         FROM post
         INNER JOIN user ON post.userID = user.userID
         ORDER BY post.postID DESC";
@@ -56,6 +57,9 @@
             $postIdArray[] = $row['postID'];
 
             echo "<p>" . $row['text'] . "</p>";
+            if ($row['imgUrl'] !== NULL) {
+                echo "<img src='img/" . $row['imgUrl'] . "'/>";
+            }
             echo "<p>Posted by " . $row['username'] . "</p>";
             echo "<p>" . $row['timestamp'] . "</p>";
 
@@ -88,19 +92,50 @@
         if (isset($_POST["postbtn"])) {
             if (!empty($_POST["text"])) {
 
-                $text = $_POST['text'];
+                if (file_exists($_FILES['img']['tmp_name']) || is_uploaded_file($_FILES['img']['tmp_name'])) {
 
-                $text = htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
+                    //save img to img folder & send back location or error
+                    $imgUrl = uploadImg($_FILES['img'], 'feed', false);
 
-                $query = "INSERT INTO post (text, userID) VALUES (?, ?)";
-                $stmt = $db->prepare($query);
-                $stmt->bind_param("si", $text, $_SESSION['userId']);
-                
-                if ($stmt->execute()) {
-                    header("Location: feed.php");
+                    //check if the img was saved, if yes continue saving data to db
+                    if (substr($imgUrl, 0, 5) == 'Error') {
+
+                        echo $imgUrl; //Error: Your image is too big!
+
+                    } else {
+
+                    $text = $_POST['text'];
+
+                    $text = htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
+
+                    $query = "INSERT INTO post (text, userID, imgUrl) VALUES (?, ?, ?)";
+                    $stmt = $db->prepare($query);
+                    $stmt->bind_param("sis", $text, $_SESSION['userId'], $imgUrl);
+                    
+                    if ($stmt->execute()) {
+                        $stmt->close();
+                        header("Location: feed.php");
+                    }
+
                 }
-                
-                $stmt->close();
+
+                } else {
+                    $text = $_POST['text'];
+
+                    $text = htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
+
+                    $query = "INSERT INTO post (text, userID VALUES (?, ?)";
+                    $stmt = $db->prepare($query);
+                    $stmt->bind_param("si", $text, $_SESSION['userId']);
+                    
+                    if ($stmt->execute()) {
+                        $stmt->close();
+                        header("Location: feed.php");
+                    }
+                    
+                }
+
+
                 
             } else {
                 echo "Please write something to publish the post.";

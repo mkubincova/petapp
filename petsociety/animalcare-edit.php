@@ -1,9 +1,10 @@
 <?php
-//check query parameters
-$id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
-?>
+    //check query parameters
+    $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
 
-<?php include 'partials/header.php'; ?>
+    include 'partials/header.php'; 
+    include 'partials/img-upload.php';
+?>
 
 <?php if ($_SESSION && $_SESSION["userType"] == 'admin') { 
 
@@ -23,18 +24,18 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
         }
     ?>
     <main>
-        <!-- Is missing file upload -->
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <label>Species</label><br>
-            <input name="species" type="text" value="<?php echo $species?>"><br>
+            <textarea cols="30" rows="2" name="species" type="text" value=""><?php echo $species?></textarea><br>
             <label>Facts</label><br>
-            <input name="facts" type="text" value="<?php echo $facts?>"><br>
+            <textarea cols="30" rows="3" name="facts" type="text" value=""><?php echo $facts?></textarea><br>
             <label>Characteristics</label><br>
-            <input name="characteristics" type="text" value="<?php echo $characteristics?>"><br>
+            <textarea cols="30" rows="3" name="characteristics" type="text" value=""><?php echo $characteristics?></textarea><br>
             <label>Average lifespan</label><br>
-            <input name="averagelifespan" type="text" value="<?php echo $averageLifespan?>"><br>
+            <textarea cols="30" rows="2" name="averagelifespan" type="text" value=""><?php echo $averageLifespan?></textarea><br>
             <label>Forbidden food</label><br>
-            <input name="forbiddenfood" type="text" value="<?php echo $forbiddenFood?>"><br>
+            <textarea cols="30" rows="3" name="forbiddenfood" type="text" value=""><?php echo $forbiddenFood?></textarea><br>
+            <input name="img" type="file"><br>
             <input type="submit" name="savebtn" value="Save Changes">
         </form>
 
@@ -44,42 +45,69 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
 }  ?>
 
 
-<?php include 'partials/footer.php'; ?>
-
-
 <?php
 
     if (isset($_POST["savebtn"])) {
+        //save img to img folder & send back location or error
+        if ($_FILES['img']['name'] !== '') {
+            $imgUrl = uploadImg($_FILES['img'], 'animal-care', false);
 
-        //Get form data
-        $speciesInput = $_POST['species'];
-        $factsInput = $_POST['facts'];
-        $characteristicsInput = $_POST['characteristics'];
-        $averageLifespanInput = $_POST['averagelifespan'];
-        $forbiddenFoodInput = $_POST['forbiddenfood'];
-
-        //Sanitize data
-        $speciesInput = htmlspecialchars($speciesInput, ENT_QUOTES, 'UTF-8');
-        $factsInput = htmlspecialchars($factsInput, ENT_QUOTES, 'UTF-8');
-        $characteristicsInput = htmlspecialchars($characteristicsInput, ENT_QUOTES, 'UTF-8');
-        $averageLifespanInput = htmlspecialchars($averageLifespanInput, ENT_QUOTES, 'UTF-8');
-        $forbiddenFoodInput = htmlspecialchars($forbiddenFoodInput, ENT_QUOTES, 'UTF-8');
-
-        //Update animal in db
-        $query = "UPDATE animal 
-        SET species = ?, facts = ?, characteristics = ?, averageLifespan = ?, forbiddenFood = ?
-        WHERE animalID = ?";
+            //check if the img was saved, if yes continue saving data to db
+            if (substr($imgUrl, 0, 5) == 'Error') {
     
-        $stmt = $db->prepare($query);
-        $stmt->bind_param("sssssi", $speciesInput, $factsInput, $characteristicsInput, $averageLifespanInput, $forbiddenFoodInput, $id);
-        
-        if ($stmt->execute()) {
-            header("Location: animalcare.php");
-        } else {
-            echo "<p>Editing failed, please try again.</p>";
+                echo $imgUrl; //Error: Your image is too big!
+    
+            } else {
+    
+                //Get form data
+                $speciesInput = $_POST['species'];
+                $factsInput = $_POST['facts'];
+                $characteristicsInput = $_POST['characteristics'];
+                $averageLifespanInput = $_POST['averagelifespan'];
+                $forbiddenFoodInput = $_POST['forbiddenfood'];
+    
+                //Sanitize data
+                $speciesInput = htmlspecialchars($speciesInput, ENT_QUOTES, 'UTF-8');
+                $factsInput = htmlspecialchars($factsInput, ENT_QUOTES, 'UTF-8');
+                $characteristicsInput = htmlspecialchars($characteristicsInput, ENT_QUOTES, 'UTF-8');
+                $averageLifespanInput = htmlspecialchars($averageLifespanInput, ENT_QUOTES, 'UTF-8');
+                $forbiddenFoodInput = htmlspecialchars($forbiddenFoodInput, ENT_QUOTES, 'UTF-8');
+    
+
+                //Update animal in db
+                $query = "UPDATE animal 
+                SET species = ?, facts = ?, characteristics = ?, averageLifespan = ?, forbiddenFood = ?, imgUrl = ?
+                WHERE animalID = ?";
+                
+                $stmt = $db->prepare($query);
+                $stmt->bind_param("ssssssi", $speciesInput, $factsInput, $characteristicsInput, $averageLifespanInput, $forbiddenFoodInput, $imgUrl, $id);
+                if ($stmt->execute()) {
+                    $stmt->close();
+                    header("Location: animalcare.php");
+                    
+                } else {
+                    echo "<p>Editing failed, please try again.</p>";
+                } 
+            }    
+
+            } else {
+                $query2 = "UPDATE animal 
+                SET species = ?, facts = ?, characteristics = ?, averageLifespan = ?, forbiddenFood = ?
+                WHERE animalID = ?";
+            
+                $stmt2 = $db->prepare($query2);
+                $stmt2->bind_param("sssssi", $speciesInput, $factsInput, $characteristicsInput, $averageLifespanInput, $forbiddenFoodInput, $id);
+
+                if ($stmt2->execute()) {
+                    $stmt2->close();
+                    header("Location: animalcare.php");
+                    
+                } else {
+                    echo "<p>Editing failed, please try again.</p>";
+                }
+            }
         }
-               
-        $stmt->close();
-    }
     
 ?>
+
+<?php include 'partials/footer.php'; ?>

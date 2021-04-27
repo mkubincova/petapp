@@ -8,15 +8,15 @@
         <!-- Add file upload -->
         <form method="post" enctype="multipart/form-data">
             <label>Species*</label><br>
-            <input name="species" type="text"><br>
+            <textarea cols="30" rows="2" name="species" type="text"></textarea><br>
             <label>Facts*</label><br>
-            <input name="facts" type="text"><br>
+            <textarea cols="30" rows="3" name="facts" type="text"></textarea><br>
             <label>Characteristics</label><br>
-            <input name="characteristics" type="text"><br>
+            <textarea cols="30" rows="3" name="characteristics" type="text"></textarea><br>
             <label>Average lifespan</label><br>
-            <input name="averagelifespan" type="text"><br>
+            <textarea cols="30" rows="2" name="averagelifespan" type="text"></textarea><br>
             <label>Forbidden food</label><br>
-            <input name="forbiddenfood" type="text"><br>
+            <textarea cols="30" rows="3" name="forbiddenfood" type="text"></textarea><br>
             <label>Profile picture* (must be jpg/jpeg/png and under 5MB)</label><br>
             <input name="img" type="file"><br>
             <input type="submit" name="addbtn" value="Add Animal">

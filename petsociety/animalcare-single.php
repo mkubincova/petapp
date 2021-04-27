@@ -30,6 +30,7 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
                 $stmt->bind_param("i", $id);
 
                 if ($stmt->execute()) {
+                    $stmt->close();
                     header("Location: animalcare.php");
                 }
             }

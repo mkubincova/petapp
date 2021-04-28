@@ -29,8 +29,6 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
             $owner = '';
             $petId = '';
 
-            //display petprofile as a form
-            echo "<form action='partials/edit-petprofile.php' method='post' enctype='multipart/form-data'>";
 
             while ($row = $result->fetch_assoc()) {
                 //save all owners of the pet in array (each row has ['userID'])
@@ -51,12 +49,11 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
             if (in_array($_SESSION['userId'], $owners)) {
                 $owner = $_SESSION['userId'];
 
-                while ($row = $result->fetch_assoc()) {
-                    //check if we already printed profile info (if not print it)
-                    //since we are getting pets by id, the data will be the same for every row - we only need it once
-                    //only owner will be diffrent because there can be multiple ones for the same pet (user_pet table)
+                //display petprofile as a form
+                echo "<form method='post' action='partials/edit-petprofile.php' method='post' enctype='multipart/form-data'>";
 
-                        $printedProfile = true;
+                while ($row = $result->fetch_assoc()) {
+
                         $petId = $row['petID'];
                         $imgUrl =  $row['imgUrl'];
 
@@ -74,7 +71,7 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
                 }
 
                 echo "Upload new profile picture: <input name='newimg' type='file' id='newimg'><br>";
-                echo "<form method='post' action='artials/create-petprofile.php'><button class='save' name='editbtn'>Save changes</button></form><br>";
+                echo "<input type='submit' class='save' name='editbtn' value='Save changes'>";
                 echo '</form>';
 
             } else {

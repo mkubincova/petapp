@@ -21,6 +21,7 @@
             $characteristics = $row['characteristics'];
             $averageLifespan = $row['averageLifespan'];
             $forbiddenFood = $row['forbiddenFood'];
+            $imgUrl = $row['imgUrl'];
         }
     ?>
     <main>
@@ -35,7 +36,10 @@
             <textarea cols="30" rows="2" name="averagelifespan" type="text" value=""><?php echo $averageLifespan?></textarea><br>
             <label>Forbidden food</label><br>
             <textarea cols="30" rows="3" name="forbiddenfood" type="text" value=""><?php echo $forbiddenFood?></textarea><br>
+            <img src="img/<?php echo $imgUrl;?>"><br>
+            <label>Upload new profile picture:</label>
             <input name="img" type="file"><br>
+            <input type="hidden" value="<?php echo $imgUrl;?>" name="oldimg" />
             <input type="submit" name="savebtn" value="Save Changes">
         </form>
 
@@ -54,6 +58,8 @@
         $characteristicsInput = $_POST['characteristics'];
         $averageLifespanInput = $_POST['averagelifespan'];
         $forbiddenFoodInput = $_POST['forbiddenfood'];
+        $oldImg = $_POST['oldimg'];
+
         //Sanitize data
         $speciesInput = htmlspecialchars($speciesInput, ENT_QUOTES, 'UTF-8');
         $factsInput = htmlspecialchars($factsInput, ENT_QUOTES, 'UTF-8');
@@ -71,6 +77,9 @@
                 echo $imgUrl; //Error: Your image is too big!
     
             } else {
+
+                //delete old profile picture from img folder
+                unlink('img/' . $oldImg);
 
                 //Update animal in db
                 $query = "UPDATE animal 

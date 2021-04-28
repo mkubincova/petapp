@@ -17,7 +17,6 @@ if (!empty($_POST['name']) && !empty($_POST['species'])) {
     $oldimg = $_POST['oldimg'];
     $id = $_POST['petId'];
    
-    //print_r($_FILES['newimg']['name']);
     //check if user uploaded a new profile picture
     if ($_FILES['newimg']['name'] !== '') {
 

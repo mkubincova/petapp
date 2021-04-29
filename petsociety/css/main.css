@@ -126,15 +126,15 @@ header ul li a:hover {
 footer{
     background-color: #8980fd;
     padding: 10px;
-     position: absolute;
-     bottom: 0;
-     left: 0;
-     right: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
     text-align: center;
 }
 footer p{
     color: #feda8b;
-    font-size: 0.6rem;
+    font-size: 0.8rem;
 }
 
 /* My pets */
@@ -152,4 +152,115 @@ div.pet-container{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+}
+
+
+
+/* Feed */
+
+
+form.post-form {
+    margin-bottom: 50px;
+}
+
+div.post-buttons {
+    display: flex;
+	justify-content: center;
+    align-content: center;
+    flex-direction: row;
+}
+
+div.post-buttons > input[type=submit]{
+    margin-left: 25px;
+}
+
+div.post-container{
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border: #333 2px solid;
+    border-radius: 15px;
+}
+
+div.post-container:last-child {
+    margin-bottom: 130px;
+}
+
+div.single-post {
+    padding: 10px 0px 40px 0px;
+    margin-top: 30px;
+    box-shadow: 0px 3px 2px rgb(51, 51, 51, 0.3);
+}
+
+div.author-time-delete {
+    display: flex;
+	justify-content: center;
+    align-content: center;
+    flex-direction: row;
+}
+
+p.author-timestamp {
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+p.author-timestamp:nth-child(2) {
+    margin-left: 30px;
+}
+
+div.author-time-delete > form > button {
+    margin-top: 12px;
+    margin-left: 30px;
+}
+
+div.post-comment > form {
+    display: flex;
+	justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+div.post-comment > form > button {
+    padding: 7px;
+    margin: 25px 0px 0px 20px;
+}
+
+div.single-comment {
+    padding: 20px;
+    background: rgba(254, 218, 139, 0.1);
+    border-bottom: #eee 1px solid;
+}
+
+
+div.author-time-delete-comment {
+    display: flex;
+	justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+div.author-time-comment {
+    display: flex;
+	justify-content: left;
+    align-items: center;
+    flex-direction: row;
+}
+
+p.author-comment {
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.comment-text {
+    margin-top: 0;
+    text-align: left;
+}
+
+
+.comment-input {
+    margin-top: 40px;
+}
+
+.add-comment {
+    background: rgba(254, 218, 139, 0.1);
+    padding-bottom: 20px;
 }

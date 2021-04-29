@@ -1,6 +1,6 @@
 <?php include "partials/header.php" ?>
 
-<main>
+<main class="login-page">
     <h3>Login</h3>
     <form action="" method="post">
         <input name="username" type="text" placeholder="Username"><br>

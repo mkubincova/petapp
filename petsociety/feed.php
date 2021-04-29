@@ -57,39 +57,41 @@
         while ($row = $result->fetch_assoc()) {
             $postIdArray[] = $row['postID'];
             
-            echo "<div class='post-container'><div class='single-post'><p>" . $row['text'] . "</p>";
+            echo "<div class='post-container'><div class='single-post'><p class='post-text'>" . $row['text'] . "</p>";
             if ($row['imgUrl'] !== NULL) {
                 echo "<img src='img/" . $row['imgUrl'] . "'/>";
             }
             echo "<div class='author-time-delete'><p class='author-timestamp'>" . $row['username'] . "</p>";
-            echo "<p class='author-timestamp'>" . $row['timestamp'] . "</p>";
+            echo "<p class='timestamp'>" . $row['timestamp'] . "</p>";
 
             if ($row['post_userID'] == $_SESSION['userId'] || $_SESSION['username'] == 'admin') {
-                echo '<form method="post"><button class="delete btn-small" name="deletepost' . $row['postID'] . '">Delete this post</button></form></div></div>';
+                echo '<form method="post"><button class="delete btn-small" name="deletepost' . $row['postID'] . '">Delete this post</button></form></div></div><div class="all-comments">';
             } else {
-                echo "</div></div>";
+                echo "</div></div><div class='all-comments'>";
             }
 
             foreach ($comments as $comment) {
                 if ($comment['comment_postID'] == $row['postID']) {
 
-                    echo "<div class='single-comment'><div class='author-time-delete-comment'><div class='author-time-comment'><p class='author-comment'>" . $comment['username'] . "</p>";
-                    echo "<p class='author-timestamp'>" . $comment['timestamp'] . "</p></div>";
+                    echo "<div class='single-comment'><p class='comment-text'>" . $comment['text'] . "</p>";
+
+                    echo "<div class='author-time-delete-comment'><div class='author-time-comment'><p class='author-comment'>" . $comment['username'] . "</p>";
+                    echo "<p class='timestamp-comment'>" . $comment['timestamp'] . "</p></div>";
 
                     if ($comment['comment_userID'] == $_SESSION['userId'] || $_SESSION['username'] == 'admin') {
-                        echo '<form method="post"><button class="delete btn-small" name="deletecomment' . $comment['commentID'] . '">Delete this comment</button></form></div>';
+                        echo '<form method="post"><button class="delete btn-small" name="deletecomment' . $comment['commentID'] . '">Delete this comment</button></form></div></div>';
                     } else {
-                        echo "</div>";
+                        echo "</div></div>";
                     }
 
-                    echo "<p class='comment-text'>" . $comment['text'] . "</p></div>";
+                    
 
                     
                 }
             }
 
             echo "<div class='post-comment'><form method='post'><textarea class='comment-input' cols='50' rows='2' name='commenttext' type='text'></textarea><br>";
-            echo "<button name='commentbtn" . $row['postID'] . "'>Comment</button></form></div></div>";
+            echo "<button name='commentbtn" . $row['postID'] . "'>Comment</button></form></div></div></div>";
 
         }
 

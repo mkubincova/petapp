@@ -1,6 +1,6 @@
 <?php include "partials/header.php" ?>
 
-<main>
+<main class="register-page">
     <h3>Register</h3>
     <form action="" method="post">
         <input name="username" type="text" placeholder="*Username"><br>

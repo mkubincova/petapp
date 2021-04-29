@@ -89,6 +89,19 @@ textarea:focus{
     border: 2px solid #8980fd;
 }
 
+input[type=submit]:disabled, input[type=submit][disabled]{
+    background-color: #8980fd;
+    color: #feda8b;
+    text-transform: uppercase;
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    padding: 7px;
+    margin: 15px 0;
+    cursor: default;
+    opacity: 0.4;
+  }
+
 /* Header */
 header{
     display: flex;
@@ -177,8 +190,11 @@ div.post-buttons > input[type=submit]{
 div.post-container{
     margin-bottom: 30px;
     padding-bottom: 30px;
-    border: #333 2px solid;
-    border-radius: 15px;
+    border-bottom: #eee 1px solid;
+    display: flex;
+	justify-content: center;
+    align-content: center;
+    flex-direction: row;
 }
 
 div.post-container:last-child {
@@ -186,9 +202,22 @@ div.post-container:last-child {
 }
 
 div.single-post {
-    padding: 10px 0px 40px 0px;
-    margin-top: 30px;
-    box-shadow: 0px 3px 2px rgb(51, 51, 51, 0.3);
+    margin-right: 60px;
+    padding-right: 60px;
+    border-right: #eee 1px solid;
+    display: flex;
+    align-items: left;
+    flex-direction: column;
+}
+
+div.single-post img {
+    align-self: start;
+    margin: 10px 0px;
+}
+
+p.post-text {
+    text-align: left;
+    margin: 10px 0 5px 0;
 }
 
 div.author-time-delete {
@@ -201,6 +230,14 @@ div.author-time-delete {
 p.author-timestamp {
     font-size: 0.8rem;
     font-weight: 700;
+    margin-top: 7px;
+
+}
+
+p.timestamp {
+    font-size: 0.8rem;
+    margin-left: 10px;
+    margin-top: 7px;
 }
 
 p.author-timestamp:nth-child(2) {
@@ -208,8 +245,17 @@ p.author-timestamp:nth-child(2) {
 }
 
 div.author-time-delete > form > button {
-    margin-top: 12px;
     margin-left: 30px;
+    margin-top: 7px;
+}
+
+div.all-comments {
+    display: flex;
+    flex-direction: column;
+}
+
+div.post-comment {
+    align-self: flex-end;
 }
 
 div.post-comment > form {
@@ -221,13 +267,12 @@ div.post-comment > form {
 
 div.post-comment > form > button {
     padding: 7px;
-    margin: 25px 0px 0px 20px;
+    margin: 10px 0px 10px 20px;
 }
 
 div.single-comment {
-    padding: 20px;
-    background: rgba(254, 218, 139, 0.1);
-    border-bottom: #eee 1px solid;
+    padding: 0px;
+    margin-bottom: 30px;
 }
 
 
@@ -248,19 +293,21 @@ div.author-time-comment {
 p.author-comment {
     font-size: 0.8rem;
     font-weight: 700;
+    margin-top: 5px;
 }
 
 .comment-text {
-    margin-top: 0;
     text-align: left;
+    margin: 10px 0 5px 0;
+}
+
+p.timestamp-comment {
+    margin-top: 5px;
+    font-size: 0.8rem;
+    margin-left: 10px;
 }
 
 
 .comment-input {
-    margin-top: 40px;
-}
-
-.add-comment {
-    background: rgba(254, 218, 139, 0.1);
-    padding-bottom: 20px;
+    margin: 10px 0px 12px 0px;
 }

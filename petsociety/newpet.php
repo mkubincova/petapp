@@ -1,7 +1,7 @@
 <?php include 'partials/header.php'; ?>
 
 <?php if ($_SESSION) { ?>
-    <main>
+    <main class="newpet-page">
 
         <h1>Fill the form to create a profile for your pet :)</h1>
 

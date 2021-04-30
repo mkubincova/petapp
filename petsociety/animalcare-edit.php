@@ -24,18 +24,18 @@
             $imgUrl = $row['imgUrl'];
         }
     ?>
-    <main>
+    <main class="animalcare-edit-page">
         <form method="post" enctype="multipart/form-data">
-            <label>Species</label><br>
-            <textarea cols="30" rows="2" name="species" type="text" value=""><?php echo $species?></textarea><br>
-            <label>Facts</label><br>
-            <textarea cols="30" rows="3" name="facts" type="text" value=""><?php echo $facts?></textarea><br>
+            <label>Species* (required)</label><br>
+            <textarea cols="60" rows="1" name="species" type="text" value=""><?php echo $species?></textarea><br>
+            <label>Facts* (required)</label><br>
+            <textarea cols="60" rows="4" name="facts" type="text" value=""><?php echo $facts?></textarea><br>
             <label>Characteristics</label><br>
-            <textarea cols="30" rows="3" name="characteristics" type="text" value=""><?php echo $characteristics?></textarea><br>
+            <textarea cols="60" rows="4" name="characteristics" type="text" value=""><?php echo $characteristics?></textarea><br>
             <label>Average lifespan</label><br>
-            <textarea cols="30" rows="2" name="averagelifespan" type="text" value=""><?php echo $averageLifespan?></textarea><br>
+            <textarea cols="60" rows="1" name="averagelifespan" type="text" value=""><?php echo $averageLifespan?></textarea><br>
             <label>Forbidden food</label><br>
-            <textarea cols="30" rows="3" name="forbiddenfood" type="text" value=""><?php echo $forbiddenFood?></textarea><br>
+            <textarea cols="60" rows="4" name="forbiddenfood" type="text" value=""><?php echo $forbiddenFood?></textarea><br>
             <img src="img/<?php echo $imgUrl;?>"><br>
             <label>Upload new profile picture:</label>
             <input name="img" type="file"><br>

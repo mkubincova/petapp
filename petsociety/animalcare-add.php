@@ -4,19 +4,18 @@
 ?>
 
 <?php if ($_SESSION && $_SESSION["userType"] == 'admin') { ?>
-    <main>
-        <!-- Add file upload -->
+    <main class="animalcare-add-page">
         <form method="post" enctype="multipart/form-data">
-            <label>Species*</label><br>
-            <textarea cols="30" rows="2" name="species" type="text"></textarea><br>
-            <label>Facts*</label><br>
-            <textarea cols="30" rows="3" name="facts" type="text"></textarea><br>
+            <label>Species* (required)</label><br>
+            <textarea cols="60" rows="1" name="species" type="text"></textarea><br>
+            <label>Facts* (required)</label><br>
+            <textarea cols="60" rows="4" name="facts" type="text"></textarea><br>
             <label>Characteristics</label><br>
-            <textarea cols="30" rows="3" name="characteristics" type="text"></textarea><br>
+            <textarea cols="60" rows="4" name="characteristics" type="text"></textarea><br>
             <label>Average lifespan</label><br>
-            <textarea cols="30" rows="2" name="averagelifespan" type="text"></textarea><br>
+            <textarea cols="60" rows="1" name="averagelifespan" type="text"></textarea><br>
             <label>Forbidden food</label><br>
-            <textarea cols="30" rows="3" name="forbiddenfood" type="text"></textarea><br>
+            <textarea cols="60" rows="4" name="forbiddenfood" type="text"></textarea><br>
             <label>Profile picture* (must be jpg/jpeg/png and under 5MB)</label><br>
             <input name="img" type="file"><br>
             <input type="submit" name="addbtn" value="Add Animal">

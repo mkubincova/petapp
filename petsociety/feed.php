@@ -5,13 +5,15 @@
 
 <?php if ($_SESSION) { ?>
     <main>
-        <form method="post" enctype="multipart/form-data">
-            <textarea name="text" type="text"></textarea><br>
-            <input name="img" type="file"><br>
-            <input type="submit" name="postbtn" value="Post">
+        <h1>Feed</h1>
+        <form class="post-form" method="post" enctype="multipart/form-data">
+            <textarea class="post-input" name="text" type="text"></textarea><br>
+            <div class="post-buttons">
+                <input name="img" type="file"><br>
+                <input type="submit" name="postbtn" value="Create a post">
+            </div>
         </form>
-        
-    </main>
+    
     <?php } else {
         header("Location: login.php");
     } ?>
@@ -55,32 +57,41 @@
         while ($row = $result->fetch_assoc()) {
             $postIdArray[] = $row['postID'];
             
-            echo "<p>" . $row['text'] . "</p>";
+            echo "<div class='post-container'><div class='single-post'><p class='post-text'>" . $row['text'] . "</p>";
             if ($row['imgUrl'] !== NULL) {
                 echo "<img src='img/" . $row['imgUrl'] . "'/>";
             }
-            echo "<p>Posted by " . $row['username'] . "</p>";
-            echo "<p>" . $row['timestamp'] . "</p>";
+            echo "<div class='author-time-delete'><p class='author-timestamp'>" . $row['username'] . "</p>";
+            echo "<p class='timestamp'>" . $row['timestamp'] . "</p>";
 
             if ($row['post_userID'] == $_SESSION['userId'] || $_SESSION['username'] == 'admin') {
-                echo '<form method="post"><button class="delete btn-small" name="deletepost' . $row['postID'] . '">Delete this post</button></form>';
+                echo '<form method="post"><button class="delete btn-small" name="deletepost' . $row['postID'] . '">Delete this post</button></form></div></div><div class="all-comments">';
+            } else {
+                echo "</div></div><div class='all-comments'>";
             }
 
             foreach ($comments as $comment) {
                 if ($comment['comment_postID'] == $row['postID']) {
-                    echo "<p>" . $comment['text'] . "</p>";
-                    echo "<p>Posted by " . $comment['username'] . "</p>";
-                    echo "<p>" . $comment['timestamp'] . "</p>";
+
+                    echo "<div class='single-comment'><p class='comment-text'>" . $comment['text'] . "</p>";
+
+                    echo "<div class='author-time-delete-comment'><div class='author-time-comment'><p class='author-comment'>" . $comment['username'] . "</p>";
+                    echo "<p class='timestamp-comment'>" . $comment['timestamp'] . "</p></div>";
 
                     if ($comment['comment_userID'] == $_SESSION['userId'] || $_SESSION['username'] == 'admin') {
-                        echo '<form method="post"><button class="delete btn-small" name="deletecomment' . $comment['commentID'] . '">Delete this comment</button></form>';
+                        echo '<form method="post"><button class="delete btn-small" name="deletecomment' . $comment['commentID'] . '">Delete this comment</button></form></div></div>';
+                    } else {
+                        echo "</div></div>";
                     }
+
+                    
+
                     
                 }
             }
 
-            echo "<form method='post'><textarea name='commenttext' type='text'></textarea><br>";
-            echo "<button name='commentbtn" . $row['postID'] . "'>Comment</button></form>";
+            echo "<div class='post-comment'><form method='post'><textarea class='comment-input' cols='50' rows='2' name='commenttext' type='text'></textarea><br>";
+            echo "<button name='commentbtn" . $row['postID'] . "'>Comment</button></form></div></div></div>";
 
         }
 
@@ -226,6 +237,6 @@
         }
 
 
-    ?>
+    ?></main>
 
 <?php include 'partials/footer.php'; ?>

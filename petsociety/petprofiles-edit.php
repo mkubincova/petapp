@@ -9,7 +9,7 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
 <?php 
 
     if ($_SESSION) { ?>
-    <main>
+    <main class="petprofiles-edit-page">
         <div>
 
             <?php
@@ -57,8 +57,8 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
                         $petId = $row['petID'];
                         $imgUrl =  $row['imgUrl'];
 
-                        echo 'Name: <input name="name" type="text" value="' . $row['name'] . '"><br>';
-                        echo 'Species: <input name="species" type="text" value="' . $row['species'] . '"><br>';
+                        echo 'Name*: <input name="name" type="text" value="' . $row['name'] . '"><br>';
+                        echo 'Species*: <input name="species" type="text" value="' . $row['species'] . '"><br>';
                         echo 'Breed: <input name="breed" type="text" value="' . $row['breed'] . '"><br>';
                         echo 'Birthday: <input name="birthday" type="date" value="' . $row['birthday'] . '"><br>';
                         echo 'Likes: <br> <textarea cols="30" rows="3" name="likes" type="text">' . $row['likes'] . '</textarea><br>';
@@ -86,3 +86,6 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
 <?php } else {
     header("Location: login.php");
 } ?>
+
+
+<?php include 'partials/footer.php'; ?>

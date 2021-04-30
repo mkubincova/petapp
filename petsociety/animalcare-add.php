@@ -4,8 +4,7 @@
 ?>
 
 <?php if ($_SESSION && $_SESSION["userType"] == 'admin') { ?>
-    <main>
-        <!-- Add file upload -->
+    <main class="animalcare-add-page">
         <form method="post" enctype="multipart/form-data">
             <label>Species* (required)</label><br>
             <textarea cols="60" rows="1" name="species" type="text"></textarea><br>

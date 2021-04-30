@@ -1,7 +1,7 @@
 <?php include 'partials/header.php'; ?>
 
 <?php if ($_SESSION) { ?>
-    <main>
+    <main class="account-page">
 
     <a href="partials/logout.php"><button>Logout</button></a>
 

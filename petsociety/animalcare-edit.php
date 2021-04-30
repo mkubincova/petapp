@@ -24,7 +24,7 @@
             $imgUrl = $row['imgUrl'];
         }
     ?>
-    <main>
+    <main class="animalcare-edit-page">
         <form method="post" enctype="multipart/form-data">
             <label>Species* (required)</label><br>
             <textarea cols="60" rows="1" name="species" type="text" value=""><?php echo $species?></textarea><br>

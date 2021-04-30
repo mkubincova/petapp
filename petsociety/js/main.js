@@ -50,3 +50,30 @@ function formValidation (fieldTypeOne, fieldTypeTwo, fieldOne, fieldTwo, imageRe
         }
     }
 }
+
+
+
+/* DISABLED FIELDS ON ACCOUNT.PHP */
+
+
+//Checks so that we are on the account page
+if (document.querySelector(".account-page")) {
+
+    var editButton = document.querySelector(".edit");
+
+    //We get all the input fields and disable them
+    var inputs = document.querySelectorAll("input");
+
+    for (var i = 0; i < inputs.length; i++) { 
+        inputs[i].disabled = true;
+    } 
+
+    //When the edit button is clicked, the input fields are enabled
+    editButton.addEventListener('click', activateEditing);
+
+    function activateEditing(e) {
+        for (var i = 0; i < inputs.length; i++) { 
+            inputs[i].disabled = false;
+        }
+    }
+}

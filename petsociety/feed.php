@@ -7,7 +7,7 @@
     <main>
         <h1>Feed</h1>
         <form class="post-form" method="post" enctype="multipart/form-data">
-            <textarea cols='125' rows='7' name="text" type="text"></textarea><br>
+            <textarea class="post-input" name="text" type="text"></textarea><br>
             <div class="post-buttons">
                 <input name="img" type="file"><br>
                 <input type="submit" name="postbtn" value="Create a post">

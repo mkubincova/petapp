@@ -3,17 +3,7 @@ include 'img-upload.php';
 include '../configurations/config.php';
 include '../configurations/db-connection.php';
 
-if (!empty($_POST['name']) && !empty($_POST['species']) && $_FILES['img']['name'] !== '') {
-   
-    //save img to img folder & send back location or error
-    $imgUrl = uploadImg($_FILES['img'], 'pet-profiles', true);
-
-    //check if the img was saved, if yes continue saving data to db
-    if (substr($imgUrl, 0, 5) == 'Error') {
-
-        echo $imgUrl; //Error: Your image is too big!
-
-    } else {
+if (!empty($_POST['name']) && !empty($_POST['species']) && !empty($_POST['imgUrl'])) {
 
         //get & sanitize rest of the form data
         $name = htmlspecialchars($_POST['name']);
@@ -23,6 +13,11 @@ if (!empty($_POST['name']) && !empty($_POST['species']) && $_FILES['img']['name'
         $likes = htmlspecialchars($_POST['likes']);
         $dislikes = htmlspecialchars($_POST['dislikes']);
         $other = htmlspecialchars($_POST['other']);
+        $tempImgUrl = htmlspecialchars($_POST['imgUrl']);
+
+    //move uploaded image from temp folder to pet-profiles
+    $imgUrl = str_replace("../img/temp", "pet-profiles", $tempImgUrl);
+    rename($tempImgUrl, "../img/" . $imgUrl);
 
         //save into pet table
         $query = "INSERT INTO pet (name, species, breed, birthday, imgUrl, likes, dislikes, otherInformation) 
@@ -53,9 +48,6 @@ if (!empty($_POST['name']) && !empty($_POST['species']) && $_FILES['img']['name'
         } else {
             echo "<p>There was an error processing your request, please try again.</p>";
         }
-
-        
-    }
  
 } else {
     echo "<p>You need to submit at least name, species and profile picture!</p>";

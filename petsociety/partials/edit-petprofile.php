@@ -16,19 +16,14 @@ if (!empty($_POST['name']) && !empty($_POST['species'])) {
     $other = htmlspecialchars($_POST['other']);
     $oldimg = $_POST['oldimg'];
     $id = $_POST['petId'];
+    $tempImgUrl = htmlspecialchars($_POST['imgUrl']);
    
     //check if user uploaded a new profile picture
-    if ($_FILES['newimg']['name'] !== '') {
+    if (!empty($tempImgUrl)) {
 
-        //validate and save the image in img folder
-        $imgUrl = uploadImg($_FILES['newimg'], 'pet-profiles', true);
-
-        //if the img was saved continue saving data to db otherwise display error
-        if (substr($imgUrl, 0, 5) == 'Error') {
-
-            echo $imgUrl; //Error: Your image is too big!
-
-        } else {
+        //move uploaded image from temp folder to pet-profiles
+        $imgUrl = str_replace("../img/temp", "pet-profiles", $tempImgUrl);
+        rename($tempImgUrl, "../img/" . $imgUrl);
 
             //delete old profile picture from img folder
             unlink('../img/' . $oldimg);
@@ -48,7 +43,6 @@ if (!empty($_POST['name']) && !empty($_POST['species'])) {
             } else {
                 echo "<p>There was an error processing your request, please try again.</p>";
             }
-        }
 
     } else {
         

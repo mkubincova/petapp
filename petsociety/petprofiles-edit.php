@@ -6,9 +6,9 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
 
 ?>
 
-<?php 
+<?php
 
-    if ($_SESSION) { ?>
+if ($_SESSION) { ?>
     <main class="petprofiles-edit-page">
         <div>
 
@@ -34,7 +34,7 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
                 //save all owners of the pet in array (each row has ['userID'])
                 $owners[] = $row['userID'];
             }
-            
+
             //This query is used to display 
             $query = "SELECT * FROM pet WHERE pet.petID = ?";
 
@@ -54,26 +54,25 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
 
                 while ($row = $result->fetch_assoc()) {
 
-                        $petId = $row['petID'];
-                        $imgUrl =  $row['imgUrl'];
+                    $petId = $row['petID'];
+                    $imgUrl =  $row['imgUrl'];
 
-                        echo 'Name*: <input name="name" type="text" value="' . $row['name'] . '"><br>';
-                        echo 'Species*: <input name="species" type="text" value="' . $row['species'] . '"><br>';
-                        echo 'Breed: <input name="breed" type="text" value="' . $row['breed'] . '"><br>';
-                        echo 'Birthday: <input name="birthday" type="date" value="' . $row['birthday'] . '"><br>';
-                        echo 'Likes: <br> <textarea cols="30" rows="3" name="likes" type="text">' . $row['likes'] . '</textarea><br>';
-                        echo 'Dislikes: <br> <textarea cols="30" rows="3" name="dislikes" type="text">' . $row['dislikes'] . '</textarea><br>';
-                        echo 'Other information: <br> <textarea cols="30" rows="10" name="other" type="text">' . $row['otherInformation'] . '</textarea><br>';
-                        echo "<img src='img/" . $imgUrl . "'></img><br>";
-                        echo "<input type='hidden' value='" . $imgUrl . "' name='oldimg' />";
-                        echo "<input type='hidden' value='" . $petId . "' name='petId' />";
-
+                    echo 'Name*: <input name="name" type="text" value="' . $row['name'] . '"><br>';
+                    echo 'Species*: <input name="species" type="text" value="' . $row['species'] . '"><br>';
+                    echo 'Breed: <input name="breed" type="text" value="' . $row['breed'] . '"><br>';
+                    echo 'Birthday: <input name="birthday" type="date" value="' . $row['birthday'] . '"><br>';
+                    echo 'Likes: <br> <textarea cols="30" rows="3" name="likes" type="text">' . $row['likes'] . '</textarea><br>';
+                    echo 'Dislikes: <br> <textarea cols="30" rows="3" name="dislikes" type="text">' . $row['dislikes'] . '</textarea><br>';
+                    echo 'Other information: <br> <textarea cols="30" rows="10" name="other" type="text">' . $row['otherInformation'] . '</textarea><br>';
+                    echo "<img src='img/" . $imgUrl . "'></img><br>";
+                    echo "<input type='hidden' value='" . $imgUrl . "' name='oldimg' />";
+                    echo "<input type='hidden' value='" . $petId . "' name='petId' />";
                 }
 
-                echo "Upload new profile picture: <input name='newimg' type='file' id='newimg'><br>";
+                echo "Upload new profile picture: <input name='newimg' type='file' id='newimg' class='image'><br>";
+                echo '<input type="hidden" id="imgUrl" name="imgUrl">';
                 echo "<input type='submit' class='save' name='editbtn' value='Save changes'>";
                 echo '</form>';
-
             } else {
                 header("Location: petprofiles.php");
             }
@@ -87,5 +86,5 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
     header("Location: login.php");
 } ?>
 
-
+<?php include 'partials/cropping-box.php'; ?>
 <?php include 'partials/footer.php'; ?>

@@ -14,8 +14,9 @@
             <textarea cols="30" rows="3" name="likes" type="text" placeholder="Long walks on the beach."></textarea><br>
             Dislikes: <br>
             <textarea cols="30" rows="3" name="dislikes" type="text" placeholder="Postmen and thunderstorms."></textarea><br>
-            Profile picture* (must be jpg/jpeg/png and under 5MB): <input name="img" type="file" id="img"><br>
+            Profile picture* (must be jpg/jpeg/png and under 5MB): <input name="image" type="file" class="image"><br>
             Other information: <br>
+            <input type="hidden" id="imgUrl" name="imgUrl">
             <textarea name="other" cols="30" rows="10" placeholder="Here you can type some interesting things about your pet..."></textarea><br>
 
             <input type="submit" value="Create profile">
@@ -25,4 +26,5 @@
     header("Location: login.php");
 } ?>
 
+<?php include 'partials/cropping-box.php'; ?>
 <?php include 'partials/footer.php'; ?>

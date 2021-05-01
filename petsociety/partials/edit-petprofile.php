@@ -62,7 +62,7 @@ if (!empty($_POST['name']) && !empty($_POST['species'])) {
         if ($stmt->execute()) {
 
             $stmt->close(); //close statement
-            header("Location: ../petprofiles-single.php?id=$id");
+            header("Location: ../mypets.php");
             
         } else {
             echo "<p>There was an error processing your request, please try again.</p>";

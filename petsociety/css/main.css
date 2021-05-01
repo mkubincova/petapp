@@ -175,7 +175,6 @@ div.pet-container{
 
 /* Feed */
 
-
 form.post-form {
     margin-bottom: 50px;
 }
@@ -323,4 +322,12 @@ textarea.post-input {
 
 textarea.post-input:focus {
     height: 17em;
+}
+
+
+
+/* Animal Care Single */
+
+.bold {
+    font-weight: 900;
 }

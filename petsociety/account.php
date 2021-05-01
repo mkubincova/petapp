@@ -5,7 +5,6 @@
 
     <a href="partials/logout.php"><button>Logout</button></a>
 
-    <!--will have a function to toggle disabled attribute & show "save changes" button-->
     <button class="edit">Edit</button>
 
     <form action="" method="post">
@@ -14,7 +13,6 @@
         <input name="lname" type="text" value="<?php echo $_SESSION["lastName"] ?>" placeholder="Last name" size="30"><br>
         <input name="email" type="email" value="<?php echo $_SESSION["email"] ?>" placeholder="Email address" size="30"><br>
         <input name="password" type="password" value="<?php echo $_SESSION["password"] ?>" placeholder="Password" size="30"><br>
-        <!--only visible when editing-->
         <input type="submit" value="Save changes">
     </form>
 
@@ -47,7 +45,7 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
     $email = filter_var($email, FILTER_SANITIZE_EMAIL);
     $password = htmlspecialchars($password, ENT_QUOTES, 'UTF-8');
 
-    //create user in db
+    //update user in db
     $query = "UPDATE user 
     SET username = ?, password = ?, firstname = ?, lastname = ?, email = ?
     WHERE userID = ?";

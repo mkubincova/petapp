@@ -24,11 +24,11 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
             while ($row = $result->fetch_assoc()) {
                 $imgUrl = $row['imgUrl'];
                 echo "<img src='img/" . $row['imgUrl'] . "'>";
-                echo "<p>Species: " . $row['species'] . "</p>";
-                echo "<p>Facts: " . $row['facts'] . "</p>";
-                echo "<p>Characteristics: " . $row['characteristics'] . "</p>";
-                echo "<p>Average Lifespan: " . $row['averageLifespan'] . "</p>";
-                echo "<p>Forbidden Food: " . $row['forbiddenFood'] . "</p>";
+                echo "<p><span class='bold'>Species: </span>" . $row['species'] . "</p>";
+                echo "<p><span class='bold'>Facts: </span>" . $row['facts'] . "</p>";
+                echo "<p><span class='bold'>Characteristics: </span>" . $row['characteristics'] . "</p>";
+                echo "<p><span class='bold'>Average Lifespan: </span>" . $row['averageLifespan'] . "</p>";
+                echo "<p><span class='bold'>Forbidden Food: </span>" . $row['forbiddenFood'] . "</p>";
             };
 
 

@@ -175,7 +175,6 @@ div.pet-container{
 
 /* Feed */
 
-
 form.post-form {
     margin-bottom: 50px;
 }
@@ -337,4 +336,9 @@ img#img {
     height: 160px;
     margin: 10px;
     border: 1px solid red;
+}
+
+/* Animal Care Single */
+.bold {
+    font-weight: 900;
 }

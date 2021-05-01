@@ -82,11 +82,7 @@
                         echo '<form method="post"><button class="delete btn-small" name="deletecomment' . $comment['commentID'] . '">Delete this comment</button></form></div></div>';
                     } else {
                         echo "</div></div>";
-                    }
-
-                    
-
-                    
+                    }   
                 }
             }
 

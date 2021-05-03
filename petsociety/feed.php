@@ -65,7 +65,7 @@
             echo "<div class='author-time-delete'><p class='author-timestamp'>" . $row['username'] . "</p>";
             echo "<p class='timestamp'>" . $row['timestamp'] . "</p>";
 
-            if ($row['post_userID'] == $_SESSION['userId'] || $_SESSION['username'] == 'admin') {
+            if ($row['post_userID'] == $_SESSION['userId'] || $_SESSION['userType'] == 'admin') {
                 echo '<form method="post"><button class="delete btn-small" name="deletepost' . $row['postID'] . '">Delete this post</button></form></div></div><div class="all-comments">';
             } else {
                 echo "</div></div><div class='all-comments'>";

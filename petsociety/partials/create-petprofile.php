@@ -32,6 +32,7 @@ if (!empty($_POST['name']) && !empty($_POST['species']) && !empty($_POST['imgUrl
             $petId = $stmt->insert_id; //get id of the new petprofile
             $userId = $_SESSION['userId']; //get id of logged user
             $stmt->close(); //close statement so we can have a new query
+
             
             //new query
             $query2 = "INSERT INTO user_pet (userID, petID) 

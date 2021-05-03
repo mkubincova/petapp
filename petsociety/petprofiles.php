@@ -17,8 +17,9 @@
                 $search = htmlspecialchars($search, ENT_QUOTES, 'UTF-8');
                 /* Checks if the name column has any keyword like the one 
         the user typed in and if so it selects it */
-                $query = strtolower("SELECT * FROM `pet` WHERE name LIKE '%$search%'");
+                $query = strtolower("SELECT * FROM `pet` WHERE name LIKE ?");
                 $stmt = $db->prepare($query);
+                $stmt->bind_param("s", $search);
                 $stmt->execute();
                 $result = $stmt->get_result();
                 $num_rows = mysqli_num_rows($result);

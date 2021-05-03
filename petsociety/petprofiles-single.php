@@ -40,25 +40,25 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
                     $petId = $row['petID'];
                     $imgUrl =  $row['imgUrl'];
 
-                    echo "<img src='img/" . $imgUrl . "'></img><br>";
+                    echo "<div class='all-info'><div class='img-upperinfo'><img src='img/" . $imgUrl . "'></img><br>";
 
-                    echo '<p>Name: ' . $row['name'] . '</p>';
-                    echo '<p>Species: ' . $row['species'] . '</p>';
+                    echo '<div class="upperinfo"><h1>' . $row['name'] . '</h1>';
+                    echo '<p><span class="bold">Species:</span> ' . $row['species'] . '</p>';
 
                     if (!empty($row['breed'])) {
-                        echo '<p>Breed: ' . $row['breed'] . '</p>';
+                        echo '<p><span class="bold">Breed:</span> ' . $row['breed'] . '</p>';
                     };
                     if (!empty($row['birthday'])) {
-                        echo '<p>Birthday: ' . $row['birthday'] . '</p>';
+                        echo '<p><span class="bold">Birthday:</span> ' . $row['birthday'] . '</p></div></div>';
                     };
                     if (!empty($row['likes'])) {
-                        echo '<p>Likes: ' . $row['likes'] . '</p>';
+                        echo '<div class="lower-info"><div class="likes-dislikes"><p class="likes"><span class="bold">Likes<br></span> ' . $row['likes'] . '</p>';
                     };
                     if (!empty($row['dislikes'])) {
-                        echo '<p>Dislikes: ' . $row['dislikes'] . '</p>';
+                        echo '<p class="dislikes"><span class="bold">Dislikes<br></span> ' . $row['dislikes'] . '</p></div>';
                     };
                     if (!empty($row['otherInformation'])) {
-                        echo '<p>Other information: ' . $row['otherInformation'] . '</p>';
+                        echo '<p class="other-info"><span class="bold">About me<br></span> ' . $row['otherInformation'] . '</p></div></div>';
                     }
                 }
             }

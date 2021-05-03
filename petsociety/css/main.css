@@ -1,8 +1,12 @@
-*{
+* {
 font-family: 'Open Sans',
 sans-serif;
 color: #333;
 box-sizing: border-box;
+}
+
+h1, h2 {
+    font-weight: 700;
 }
 
 html{
@@ -33,21 +37,27 @@ img {
     color:#333;
 }
 
-/* Buttons and forms*/
+/* Buttons, links and forms*/
+
+a, a:hover {
+    color: #333;
+}
+
 button, input[type=submit], input[type=file]{
     background-color: #8980fd;
     color: #feda8b;
+    font-size: 0.8rem;
     text-transform: uppercase;
     font-weight: 600;
     border: none;
-    border-radius: 5px;
-    padding: 7px;
+    border-radius: 10px;
+    padding: 7px 15px;
     margin: 15px 0;
     cursor: pointer;
 }
 button:hover,
 input[type=submit]:hover {
-    background-color: #766de7;
+    background-color: rgb(118, 109, 231);
 }
 .delete, input[type=submit].delete{
     background-color: #fd9967;
@@ -72,13 +82,21 @@ button.edit:hover {
 
 input{
     border: none;
-    border-bottom: 2px solid #333;
+    background-color:rgba(137, 128, 253, 0.15);
+    padding: 7px 20px;
+    border-radius: 12px;
     margin: 10px 0;
 }
+
 input:focus {
     outline: none;
     border-bottom: 2px solid #8980fd;
 }
+
+::placeholder {
+    color: #333;
+    font-size: 0.9rem;
+  }
 
 textarea{
     border: 2px solid #333;
@@ -148,8 +166,10 @@ footer{
     left: 0;
     right: 0;
     text-align: center;
+    margin-top: 30px;
 }
 footer p{
+    margin: 10px 0px;
     color: #feda8b;
     font-size: 0.6rem;
 }
@@ -163,15 +183,6 @@ h5{
     font-weight: 300;
     margin-top: 5px;
 }
-
-/* Pet profiles */
-div.pet-container{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-}
-
-
 
 /* Feed */
 
@@ -336,7 +347,120 @@ img#img {
     border: 1px solid red;
 }
 
+
+
+/* Pet profiles (browse pets) */
+
+.search-field {
+    width: 30vw;
+    margin: 40px 10px 50px 0;
+}
+
+.all-btn {
+    margin-left: 30px;
+}
+
+div.pet-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.single-pet {
+    margin: 20px 30px 50px 50px; 
+    border-radius: 15%;
+    background-color: rgba(137, 128, 253, 0.1);
+}
+
+.single-pet > a > img {
+    border-radius: 15% 15% 0% 0%;
+}
+
+.single-pet > p {
+    font-weight: 600;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+
+
+
+
 /* Animal Care Single */
+
+.all-info {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+}
+
+.img-upperinfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 50px;
+
+}
+
+.img-upperinfo > img {
+    border-radius: 15%;
+}
+
+.upperinfo {
+    margin-left: 45px;
+    align-self: flex-end;
+}
+
+.upperinfo > p {
+    margin: 10px 0px 0px 0px;
+}
+
+.upperinfo > h1 {
+    margin-bottom: 10px;
+}
+
+.lower-info {
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 500px;
+    margin-left: 80px;
+}
+
+.likes-dislikes {
+    display: flex;
+    flex-direction: row;
+    width: 500px;
+}
+
+.likes {
+    margin-right: 60px;
+    width: 250px;
+}
+
+.dislikes {
+    width: 250px;
+}
+
+.lower-info > p {
+    text-align: left;
+}
+
+.other-info {
+    margin-top: 15px;
+    width: 500px;
+}
+
+.upperinfo, .other-info, .likes-dislikes > p {
+    text-align: left;
+}
+
 .bold {
     font-weight: 900;
 }

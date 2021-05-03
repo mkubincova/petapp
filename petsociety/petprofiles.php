@@ -2,10 +2,11 @@
 
 <?php if ($_SESSION) { ?>
     <main>
+        <h1>Browse Pets</h1>
         <form method="post">
-            <input type="text" name="search" />
+            <input type="text" name="search" class="search-field" placeholder="Search for pets" />
             <button type="submit" name="searchbutton">Search</button>
-            <button type="submit" name="showall">All pets</button>
+            <button type="submit" name="showall" class="all-btn">Show all pets</button>
         </form>
         <div class="pet-container">
 
@@ -25,9 +26,9 @@
                 $num_rows = mysqli_num_rows($result);
 
                 while ($row = $result->fetch_assoc()) {
-                    echo '<div>';
-                    echo "<a href='petprofiles-single.php?id=" . $row['petID'] . "'><img src='img/" . $row['imgUrl'] . "'></a>";
-                    echo "<a href='petprofiles-single.php?id=" . $row['petID'] . "'>" . $row['name'] . "</a>";
+                    echo '<div class="single-pet">';
+                    echo "<a href='petprofiles-single.php?id=" . $row['petID'] . "'><img src='img/" . $row['imgUrl'] . "'></a><br>";
+                    echo "<p><a href='petprofiles-single.php?id=" . $row['petID'] . "'>" . $row['name'] . "</a></p>";
                     echo '</div>';
                 }
 
@@ -41,9 +42,9 @@
                 $result = $stmt->get_result();
 
                 while ($row = $result->fetch_assoc()) {
-                    echo '<div>';
-                    echo "<a href='petprofiles-single.php?id=" . $row['petID'] . "'><img src='img/" . $row['imgUrl'] . "'></a>";
-                    echo "<a href='petprofiles-single.php?id=" . $row['petID'] . "'>" . $row['name'] . "</a>";
+                    echo '<div class="single-pet">';
+                    echo "<a href='petprofiles-single.php?id=" . $row['petID'] . "'><img src='img/" . $row['imgUrl'] . "'></a><br>";
+                    echo "<p><a href='petprofiles-single.php?id=" . $row['petID'] . "'>" . $row['name'] . "</a></p>";
                     echo '</div>';
                 };
             }
@@ -54,3 +55,6 @@
 <?php } else {
     header("Location: login.php");
 } ?>
+
+
+<?php include 'partials/footer.php'; ?>

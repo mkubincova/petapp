@@ -1,6 +1,8 @@
 <?php 
     include 'partials/header.php'; 
     include 'partials/img-upload.php';
+    //header() not working without this
+    ob_start();
 ?>
 
 <?php if ($_SESSION) { ?>
@@ -19,7 +21,6 @@
     } ?>
 
     <?php
-
 
         //Get data from comment & user table and save in array
 
@@ -79,7 +80,7 @@
                     echo "<p class='timestamp-comment'>" . $comment['timestamp'] . "</p></div>";
 
                     if ($comment['comment_userID'] == $_SESSION['userId'] || $_SESSION['username'] == 'admin') {
-                        echo '<form method="post"><button class="delete btn-small" name="deletecomment' . $comment['commentID'] . '">Delete this comment</button></form></div></div>';
+                        echo '<form method="post"><input type="submit" value="Delete this comment" class="delete btn-small" name="deletecomment' . $comment['commentID'] . '"></form></div></div>';
                     } else {
                         echo "</div></div>";
                     }   
@@ -118,12 +119,11 @@
                     $stmt = $db->prepare($query);
                     $stmt->bind_param("sis", $text, $_SESSION['userId'], $imgUrl);
                     
-                    if ($stmt->execute()) {
-                        $stmt->close();
-                        header("Location: feed.php");
+                        if ($stmt->execute()) {
+                            $stmt->close();
+                            header('Location: feed.php');
+                        }
                     }
-
-                }
 
                 } else {
                     $text = $_POST['text'];
@@ -136,18 +136,14 @@
                     
                     if ($stmt->execute()) {
                         $stmt->close();
-                        header("Location: feed.php");
+                        header('Location: feed.php');
                     }
-                    
                 }
-
-
-                
             } else {
                 echo "Please write something to publish the post.";
             }
         }
-
+   
 
         //Delete post
         foreach ($postIdArray as $postID) {
@@ -178,10 +174,10 @@
                 $stmt = $db->prepare($query);
                 $stmt->bind_param("i", $postID);
                 
-                if ($stmt->execute()) {
-                    unlink('img/' . $imgUrl);
-                    header("Location: feed.php");
-                }
+                    if ($stmt->execute()) {
+                        unlink('img/' . $imgUrl);
+                        header("Location: feed.php");
+                    }
 
                 $stmt->close();
             }

@@ -269,9 +269,8 @@ div.post-container:last-child {
 }
 
 div.single-post {
-    margin-right: 60px;
     padding-right: 60px;
-    width: 100%;
+    width: 50%;
     border-right: #eee 1px solid;
     display: flex;
     align-items: left;
@@ -319,10 +318,13 @@ div.author-time-delete > form > button {
 div.all-comments {
     display: flex;
     flex-direction: column;
+    width: 50%;
+    padding-left: 60px;
 }
 
 div.post-comment {
     align-self: flex-end;
+    width: 100%;
 }
 
 div.post-comment > form {

@@ -2,7 +2,7 @@
 
 <?php if ($_SESSION) { ?>
     <main>
-        <h1>Browse Pets</h1>
+        <h2>Browse Pets</h2>
         <form method="post">
             <input type="text" name="search" class="search-field" placeholder="Search for pets" />
             <button type="submit" name="searchbutton">Search</button>

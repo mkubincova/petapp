@@ -1,12 +1,14 @@
 <?php include "partials/header.php" ?>
 
 <main class="login-page">
+    <div class="login-container">
     <h3>Login</h3>
-    <form action="" method="post">
-        <input name="username" type="text" placeholder="Username"><br>
-        <input name="password" type="password" placeholder="Password"><br>
-        <input type="submit" value="Login">
-    </form>
+        <form action="" method="post">
+            <input name="username" type="text" placeholder="Username"><br>
+            <input name="password" type="password" placeholder="Password"><br>
+            <input type="submit" value="Login">
+        </form>
+    </div>
 </main>
 
 <?php

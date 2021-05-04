@@ -47,18 +47,24 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
 
                     if (!empty($row['breed'])) {
                         echo '<p><span class="bold">Breed:</span> ' . $row['breed'] . '</p>';
-                    };
+                    }
                     if (!empty($row['birthday'])) {
                         echo '<p><span class="bold">Birthday:</span> ' . $row['birthday'] . '</p></div></div>';
-                    };
+                    } else {
+                        echo '</div></div>';
+                    }
                     if (!empty($row['likes'])) {
                         echo '<div class="lower-info"><div class="likes-dislikes"><p class="likes"><span class="bold">Likes<br></span> ' . $row['likes'] . '</p>';
-                    };
+                    }
                     if (!empty($row['dislikes'])) {
                         echo '<p class="dislikes"><span class="bold">Dislikes<br></span> ' . $row['dislikes'] . '</p></div>';
-                    };
+                    } else {
+                        echo '</div>';
+                    }
                     if (!empty($row['otherInformation'])) {
                         echo '<p class="other-info"><span class="bold">About me<br></span> ' . $row['otherInformation'] . '</p></div></div>';
+                    } else {
+                        echo '</div>';
                     }
                 }
             }
@@ -67,9 +73,9 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
             //check if user is one of the owners
             if (in_array($_SESSION['userId'], $owners)) {
                 $owner = $_SESSION['userId'];
-                //show options to manipulate the 
-                echo "<form method='post'><button class='edit' name='editbtn'>Edit Pet Profile</button></form><br>";
-                echo "<a href='partials/delete-petprofile.php?id=$petId&img=$imgUrl'><button class='delete'>Delete this profile</button></a>";
+                //show options to manipulate the pet
+                echo "<div class='single-edit-delete-btns'><form method='post'><button class='edit' name='editbtn'>Edit Pet Profile</button></form><br>";
+                echo "<a href='partials/delete-petprofile.php?id=$petId&img=$imgUrl'><button class='delete'>Delete this profile</button></a></div>";
             }
 
             if (isset($_POST['editbtn'])) {
@@ -77,10 +83,10 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
             }
 
             ?>
-        </div>
+        
 
         <?php if ($owner == $_SESSION['userId']) { ?>
-            <div>
+            <div class="owners">
                 <h3>Does this pet have more owners?</h3>
                 <p>Add them here using their email addresses:</p>
                 <form action='partials/add-owner.php' method="POST">
@@ -90,7 +96,7 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
                 </form>
             </div>
 
-            <div>
+            <div class="owners">
                 <h3>This is not my pet!</h3>
                 <form action='partials/delete-owner.php' method="POST">
                     <input type="hidden" name="petId" value="<?php echo $petId ?>">
@@ -99,7 +105,11 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
                 </form>
             </div>
         <?php } ?>
+        </div>
     </main>
 <?php } else {
     header("Location: login.php");
 } ?>
+
+
+<?php include 'partials/footer.php' ?>

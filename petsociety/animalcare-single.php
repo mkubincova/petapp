@@ -11,7 +11,7 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
 <?php if ($_SESSION) { ?>
     <main>
 
-        <div>
+        <div class="animalcare-single-container">
 
         <?php
 
@@ -22,19 +22,31 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
             $result = $stmt->get_result();
 
             while ($row = $result->fetch_assoc()) {
+                echo "<div class='animalinfo-container'>";
                 $imgUrl = $row['imgUrl'];
                 echo "<img src='img/" . $row['imgUrl'] . "'>";
-                echo "<p><span class='bold'>Species: </span>" . $row['species'] . "</p>";
-                echo "<p><span class='bold'>Facts: </span>" . $row['facts'] . "</p>";
-                echo "<p><span class='bold'>Characteristics: </span>" . $row['characteristics'] . "</p>";
-                echo "<p><span class='bold'>Average Lifespan: </span>" . $row['averageLifespan'] . "</p>";
-                echo "<p><span class='bold'>Forbidden Food: </span>" . $row['forbiddenFood'] . "</p>";
+                echo "<h2>" . $row['species'] . "</h2>";
+                echo "<div class='animalinfo-text'>";
+                echo "<p><span class='bold'>Facts</span><br>" . $row['facts'] . "</p>";
+                if (!empty($row['characteristics'])) {
+                    echo "<p><span class='bold'>Characteristics<br></span>" . $row['characteristics'] . "</p>";
+                }
+                if (!empty($row['averageLifespan'])) {
+                echo "<p><span class='bold'>Average Lifespan<br></span>" . $row['averageLifespan'] . "</p>"; 
+                }
+                if (!empty($row['forbiddenFood'])) {
+                echo "<p><span class='bold'>Forbidden Food<br></span>" . $row['forbiddenFood'] . "</p>";
+                }
+                echo "</div>";
+                echo "</div>";
             };
 
 
             if ($_SESSION["userType"] == 'admin') {
+                echo '<div class="animalsingle-btn-container">';
                 echo '<form method="post"><button class="edit" type="submit" name="editbtn">Edit Animal</button></form>';
                 echo '<form method="post"><button class="delete" type="submit" name="deletebtn">Delete Animal</button></form>';
+                echo '</div>';
 
             }
 

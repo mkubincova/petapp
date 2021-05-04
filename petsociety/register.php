@@ -1,15 +1,17 @@
 <?php include "partials/header.php" ?>
 
 <main class="register-page">
-    <h3>Register</h3>
-    <form action="" method="post">
-        <input name="username" type="text" placeholder="*Username"><br>
-        <input name="fname" type="text" placeholder="First name"><br>
-        <input name="lname" type="text" placeholder="Last name"><br>
-        <input name="email" type="email" placeholder="Email address"><br>
-        <input name="password" type="password" placeholder="*Password"><br> <!--add the eye to toggle password visibilty -->
-        <input type="submit" value="Register">
-    </form>
+    <div class="register-container">
+        <h2>Register</h2>
+        <form action="" method="post">
+            <input name="username" type="text" placeholder="*Username"><br>
+            <input name="fname" type="text" placeholder="First name"><br>
+            <input name="lname" type="text" placeholder="Last name"><br>
+            <input name="email" type="email" placeholder="Email address"><br>
+            <input name="password" type="password" placeholder="*Password"><br> <!--add the eye to toggle password visibilty -->
+            <input type="submit" value="Register">
+        </form>
+    </div>
 </main>
 
 

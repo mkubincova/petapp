@@ -31,23 +31,29 @@ $stmt->execute();
 
 <?php if ($_SESSION) { ?>
     <main>
-        <h5>Did you know?</h5>
+        <div>
+            <h5 class="fact-heading">Did you know?</h5>
 
-        <?php
-        //if there is a fact array, display random fact from it
-        if ($facts_array) {
-            $random_index = rand(0, $max_index);
-            $show_fact = $facts_array[$random_index]["text"];
-            echo "<h2 class='fact'>$show_fact</h2>";
-        }
+            <?php
+            //if there is a fact array, display random fact from it
+            if ($facts_array) {
+                $random_index = rand(0, $max_index);
+                $show_fact = $facts_array[$random_index]["text"];
+                echo "<h3 class='fact'>$show_fact</h3>";
+            }
 
-        echo "<h1>My pets</h1>";
-        echo "<a href='newpet.php'><button>Add pet</button></a><br>";
-        echo "<div class='pet-container'>";
-        while ($stmt->fetch()) {
-            echo "<a href='petprofiles-single.php?id=$id'><img src='img/$imgUrl'></a>";
-        }
-        ?>
+            echo "<a href='newpet.php'><button class='add-pet'>Add new pet</button></a><br>";
+            echo "<h2 class='mypets-heading'>My pets</h2>";
+            echo "<div class='pet-container'>";
+            while ($stmt->fetch()) {
+                echo "<div class='single-pet'>";
+                echo "<a href='petprofiles-single.php?id=$id'><img src='img/$imgUrl'></a>";
+                echo "<p><a href='petprofiles-single.php?id=$id'>" . $name . "</a></p>";
+                echo "</div>";
+            }
+            echo "</div>";
+
+            ?>
         </div>
     </main>
 <?php } else {

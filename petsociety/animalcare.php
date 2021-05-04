@@ -2,6 +2,7 @@
 <?php if ($_SESSION) { ?>
     <main>
         <div>
+            <h2 class="animalcare-h1">Animal Care</h2>
             <?php
             if ($_SESSION["userType"] == 'admin') {
                 echo '<form method="post"><button type="submit" name="addbtn">Add Animal</button></form>';
@@ -16,9 +17,12 @@
             $stmt->execute();
             $result = $stmt->get_result();
 
-            echo"<div class='pet-container'>";
+            echo "<div class='pet-container'>";
             while ($row = $result->fetch_assoc()) {
+                echo "<div class='single-animal'>";
                 echo "<a href='animalcare-single.php?id=" . $row['animalID'] . "'><img src='img/" . $row['imgUrl'] . "'></a>";
+                echo "<p><a href='animalcare-single.php?id=" . $row['animalID'] . "'>" . $row['species'] . "</a></p>";
+                echo "</div>";
             };
             ?>
             </div>

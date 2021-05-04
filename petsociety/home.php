@@ -1,12 +1,12 @@
 <?php include 'partials/header.php'; ?>
 
 <main>
-    <h1>Welcome text</h1>
-    <a href="login.php"><button>Log in</button></a>
-    <a href="register.php"><button>Register</button></a>
-
-    <h3>Info about website</h3>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <div class="home-container">
+        <h1>Welcome to Pet Society</h1>
+        <h3>The ultimate platform for pet owners</h3>   
+        <a href="login.php"><button>Log in</button></a><br>
+        <a href="register.php"><button>Register</button></a>
+    </div> 
 </main>
 
 <?php include 'partials/footer.php'; ?>

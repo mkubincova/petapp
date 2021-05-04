@@ -21,7 +21,7 @@
                    </div>
                </div>
                <div class="modal-footer">
-                   <button type="button"  data-dismiss="modal">Cancel</button>
+                   <button type="button"  data-dismiss="modal" class="cancel-btn">Cancel</button>
                    <button type="button"  id="crop">Crop</button>
                </div>
            </div>

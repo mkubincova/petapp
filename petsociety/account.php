@@ -2,22 +2,23 @@
 
 <?php if ($_SESSION) { ?>
     <main class="account-page">
+        <div class="account-container">
+            <a href="partials/logout.php"><button>Logout</button></a>
 
-    <a href="partials/logout.php"><button>Logout</button></a>
+            <button class="edit">Edit</button>
 
-    <button class="edit">Edit</button>
+            <form action="" method="post">
+                <input name="username" type="text" value="<?php echo $_SESSION["username"] ?> " placeholder="Username" size="30"><br>
+                <input name="fname" type="text" value="<?php echo $_SESSION["firstName"] ?>" placeholder="First name" size="30"><br>
+                <input name="lname" type="text" value="<?php echo $_SESSION["lastName"] ?>" placeholder="Last name" size="30"><br>
+                <input name="email" type="email" value="<?php echo $_SESSION["email"] ?>" placeholder="Email address" size="30"><br>
+                <input name="password" type="password" value="<?php echo $_SESSION["password"] ?>" placeholder="Password" size="30"><br>
+                <input type="submit" value="Save changes">
+            </form>
 
-    <form action="" method="post">
-        <input name="username" type="text" value="<?php echo $_SESSION["username"] ?> " placeholder="Username" size="30"><br>
-        <input name="fname" type="text" value="<?php echo $_SESSION["firstName"] ?>" placeholder="First name" size="30"><br>
-        <input name="lname" type="text" value="<?php echo $_SESSION["lastName"] ?>" placeholder="Last name" size="30"><br>
-        <input name="email" type="email" value="<?php echo $_SESSION["email"] ?>" placeholder="Email address" size="30"><br>
-        <input name="password" type="password" value="<?php echo $_SESSION["password"] ?>" placeholder="Password" size="30"><br>
-        <input type="submit" value="Save changes">
-    </form>
-
-    <a href="partials/delete-account.php"><button class="delete">Delete account</button></a>
-</main>
+            <a href="partials/delete-account.php"><button class="delete">Delete account</button></a>
+    </div>
+    </main>
 <?php } else {
     header("Location: login.php");
 } ?>

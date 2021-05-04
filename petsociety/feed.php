@@ -7,7 +7,7 @@
 
 <?php if ($_SESSION) { ?>
     <main>
-        <h1>Feed</h1>
+        <h2>Feed</h2>
         <form class="post-form" method="post" enctype="multipart/form-data">
             <textarea class="post-input" name="text" type="text"></textarea><br>
             <div class="post-buttons">

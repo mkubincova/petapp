@@ -5,23 +5,25 @@ include 'partials/img-upload.php';
 
 <?php if ($_SESSION && $_SESSION["userType"] == 'admin') { ?>
     <main class="animalcare-add-page">
-        <form method="post" enctype="multipart/form-data">
-            <label>Species* (required)</label><br>
-            <textarea cols="60" rows="1" name="species" type="text"></textarea><br>
-            <label>Facts* (required)</label><br>
-            <textarea cols="60" rows="4" name="facts" type="text"></textarea><br>
-            <label>Characteristics</label><br>
-            <textarea cols="60" rows="4" name="characteristics" type="text"></textarea><br>
-            <label>Average lifespan</label><br>
-            <textarea cols="60" rows="1" name="averagelifespan" type="text"></textarea><br>
-            <label>Forbidden food</label><br>
-            <textarea cols="60" rows="4" name="forbiddenfood" type="text"></textarea><br>
-            <label>Profile picture* (must be jpg/jpeg/png and under 5MB)</label><br>
-            <input name="img" type="file" class="image"><br>
-            <input type="hidden" id="imgUrl" name="imgUrl">
-            <input type="submit" name="addbtn" value="Add Animal">
-        </form>
-
+        <div class="addanimal-container">
+            <h2 class="addanimal-h1">Add Animal</h2>
+            <form method="post" enctype="multipart/form-data">
+                <label class="bold">Species* (required)</label><br>
+                <textarea cols="60" rows="1" name="species" type="text"></textarea><br>
+                <label class="bold">Facts* (required)</label><br>
+                <textarea cols="60" rows="4" name="facts" type="text"></textarea><br>
+                <label class="bold">Characteristics</label><br>
+                <textarea cols="60" rows="4" name="characteristics" type="text"></textarea><br>
+                <label class="bold">Average lifespan</label><br>
+                <textarea cols="60" rows="1" name="averagelifespan" type="text"></textarea><br>
+                <label class="bold">Forbidden food</label><br>
+                <textarea cols="60" rows="4" name="forbiddenfood" type="text"></textarea><br>
+                <label class="bold">Profile picture* (must be jpg/jpeg/png and under 5MB)</label><br>
+                <input name="img" type="file" class="image"><br>
+                <input type="hidden" id="imgUrl" name="imgUrl">
+                <input type="submit" name="addbtn" value="Add Animal">
+            </form>
+        </div>
     </main>
 <?php } else {
     header("Location: login.php");
@@ -65,10 +67,10 @@ if (isset($_POST["addbtn"])) {
         }
 
         $stmt->close();
+    } else {
+        echo "The animal couldn't be added. Please fill in species, facts and add an image.";
     }
-} else {
-    echo "The animal couldn't be added. Please fill in species, facts and add an image.";
-}
+} 
 
 ?>
 

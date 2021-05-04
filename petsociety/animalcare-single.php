@@ -27,15 +27,15 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
                 echo "<img src='img/" . $row['imgUrl'] . "'>";
                 echo "<h2>" . $row['species'] . "</h2>";
                 echo "<div class='animalinfo-text'>";
-                echo "<p><span class='bold'>Facts</span><br>" . $row['facts'] . "</p>";
+                echo "<p class='facts'><span class='bold'>Facts</span><br>" . $row['facts'] . "</p>";
                 if (!empty($row['characteristics'])) {
-                    echo "<p><span class='bold'>Characteristics<br></span>" . $row['characteristics'] . "</p>";
+                    echo "<p class='characteristics'><span class='bold'>Characteristics<br></span>" . $row['characteristics'] . "</p>";
                 }
                 if (!empty($row['averageLifespan'])) {
-                echo "<p><span class='bold'>Average Lifespan<br></span>" . $row['averageLifespan'] . "</p>"; 
+                echo "<p class='average-lifespan'><span class='bold'>Average Lifespan<br></span>" . $row['averageLifespan'] . "</p>"; 
                 }
                 if (!empty($row['forbiddenFood'])) {
-                echo "<p><span class='bold'>Forbidden Food<br></span>" . $row['forbiddenFood'] . "</p>";
+                echo "<p class='forbidden-food'><span class='bold'>Forbidden Food<br></span>" . $row['forbiddenFood'] . "</p>";
                 }
                 echo "</div>";
                 echo "</div>";

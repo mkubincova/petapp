@@ -92,7 +92,7 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
                 <form action='partials/add-owner.php' method="POST">
                     <input type="hidden" name="petId" value="<?php echo $petId ?>">
                     <input type="email" name="new-owner" placeholder="another@owner.com">
-                    <input type="submit" value="Add owner">
+                    <button class='add-pet'>Add new pet <img class='icon' src='img/icons/add-yellow.png'></button>
                 </form>
             </div>
 
@@ -101,7 +101,7 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
                 <form action='partials/delete-owner.php' method="POST">
                     <input type="hidden" name="petId" value="<?php echo $petId ?>">
                     <input type="hidden" name="userId" value="<?php echo $owner ?>">
-                    <input type="submit" value="Delete from My pets" class="delete">
+                    <button class='delete'>Delete this profile <img class='icon' src='img/icons/delete.png'></button>
                 </form>
             </div>
         <?php } ?>

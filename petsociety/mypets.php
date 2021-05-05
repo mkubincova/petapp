@@ -3,7 +3,7 @@ include 'partials/img-upload.php';?>
 
 <?php
 //API implementation
-$facts_url = "http://localhost/awa/api/facts.php";
+$facts_url = "http://localhost/petapp/api/facts.php";
 
 $client = curl_init($facts_url);
 curl_setopt($client, CURLOPT_RETURNTRANSFER, true); //return transfer as a string
@@ -42,7 +42,7 @@ $stmt->execute();
                 echo "<h3 class='fact'>$show_fact</h3>";
             }
 
-            echo "<a href='newpet.php'><button class='add-pet'>Add new pet</button></a><br>";
+            echo "<a href='newpet.php'><button class='add-pet'>Add new pet <img class='icon' src='img/icons/add-yellow.png'></button></a><br>";
             echo "<h2 class='mypets-heading'>My pets</h2>";
             echo "<div class='pet-container'>";
             while ($stmt->fetch()) {

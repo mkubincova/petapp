@@ -337,6 +337,8 @@ div.post-comment > form {
 div.post-comment > form > button {
     padding: 7px;
     margin: 10px 0px 10px 20px;
+    display: flex;
+    flex-direction: row;
 }
 
 div.single-comment {
@@ -724,4 +726,8 @@ p.forbidden-food {
 .icon{
     height: 20px;
     padding-bottom: 2px;
+}
+
+.icon.comment, .icon.characteristics {
+    padding-left: 5px;
 }

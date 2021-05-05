@@ -5,7 +5,7 @@
         <div class="account-container">
             <a href="partials/logout.php"><button>Logout</button></a>
 
-            <button class="edit">Edit</button>
+            <button class="edit">Edit <img class="icon" src="img/icons/edit.png"></button>
 
             <form action="" method="post">
                 <input name="username" type="text" value="<?php echo $_SESSION["username"] ?> " placeholder="Username" size="30"><br>
@@ -16,7 +16,7 @@
                 <input type="submit" value="Save changes">
             </form>
 
-            <a href="partials/delete-account.php"><button class="delete">Delete account</button></a>
+            <a href="partials/delete-account.php"><button class="delete">Delete account <img class="icon" src="img/icons/delete.png"></button></a>
     </div>
     </main>
 <?php } else {

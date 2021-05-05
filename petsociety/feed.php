@@ -88,7 +88,7 @@
             }
 
             echo "<div class='post-comment'><form method='post'><textarea class='comment-input' cols='50' rows='2' name='commenttext' type='text'></textarea><br>";
-            echo "<button name='commentbtn" . $row['postID'] . "'>Comment</button></form></div></div></div>";
+            echo "<button name='commentbtn" . $row['postID'] . "'>Comment <img class='icon comment' src='img/icons/comment-yellow.png'></button></form></div></div></div>";
 
         }
 

@@ -5,8 +5,8 @@
         <h2>Browse Pets</h2>
         <form method="post">
             <input type="text" name="search" class="search-field" placeholder="Search for pets" />
-            <button type="submit" name="searchbutton">Search</button>
-            <button type="submit" name="showall" class="all-btn">Show all pets</button>
+            <button type="submit" name="searchbutton">Search <img class='icon' src='img/icons/search-yellow.png'></button>
+            <button type="submit" name="showall" class="all-btn">Show all pets <img class='icon' src='img/icons/pets.png'></button>
         </form>
         <div class="pet-container">
 

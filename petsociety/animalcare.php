@@ -5,7 +5,7 @@
             <h2 class="animalcare-h1">Animal Care</h2>
             <?php
             if ($_SESSION["userType"] == 'admin') {
-                echo '<form method="post"><button type="submit" name="addbtn">Add Animal</button></form>';
+                echo '<form method="post"><button type="submit" name="addbtn">Add Animal <img class="icon" src="img/icons/add-yellow.png"></button></form>';
             }
 
             if (isset($_POST['addbtn'])) {

@@ -720,3 +720,8 @@ p.forbidden-food {
 .account-container > button {
     margin-left: 20px;
 }
+
+.icon{
+    height: 20px;
+    padding-bottom: 2px;
+}

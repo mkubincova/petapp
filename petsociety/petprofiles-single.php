@@ -54,15 +54,15 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
                         echo '</div></div>';
                     }
                     if (!empty($row['likes'])) {
-                        echo '<div class="lower-info"><div class="likes-dislikes"><p class="likes"><span class="bold">Likes<br></span> ' . $row['likes'] . '</p>';
+                        echo '<div class="lower-info"><div class="likes-dislikes"><p class="likes"><span class="bold">Likes <img class="icon" src="img/icons/likes.png"><br></span> ' . $row['likes'] . '</p>';
                     }
                     if (!empty($row['dislikes'])) {
-                        echo '<p class="dislikes"><span class="bold">Dislikes<br></span> ' . $row['dislikes'] . '</p></div>';
+                        echo '<p class="dislikes"><span class="bold">Dislikes <img class="icon" src="img/icons/dislikes.png"><br></span> ' . $row['dislikes'] . '</p></div>';
                     } else {
                         echo '</div>';
                     }
                     if (!empty($row['otherInformation'])) {
-                        echo '<p class="other-info"><span class="bold">About me<br></span> ' . $row['otherInformation'] . '</p></div></div>';
+                        echo '<p class="other-info"><span class="bold">About me <img class="icon" src="img/icons/info.png"><br></span> ' . $row['otherInformation'] . '</p></div></div>';
                     } else {
                         echo '</div>';
                     }
@@ -74,8 +74,8 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
             if (in_array($_SESSION['userId'], $owners)) {
                 $owner = $_SESSION['userId'];
                 //show options to manipulate the pet
-                echo "<div class='single-edit-delete-btns'><form method='post'><button class='edit' name='editbtn'>Edit Pet Profile</button></form><br>";
-                echo "<a href='partials/delete-petprofile.php?id=$petId&img=$imgUrl'><button class='delete'>Delete this profile</button></a></div>";
+                echo "<div class='single-edit-delete-btns'><form method='post'><button class='edit' name='editbtn'>Edit Pet Profile <img class='icon' src='img/icons/edit.png'></button></form><br>";
+                echo "<a href='partials/delete-petprofile.php?id=$petId&img=$imgUrl'><button class='delete'>Delete this profile <img class='icon' src='img/icons/delete.png'></button></a></div>";
             }
 
             if (isset($_POST['editbtn'])) {

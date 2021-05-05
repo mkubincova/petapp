@@ -3,7 +3,7 @@ include 'partials/img-upload.php';?>
 
 <?php
 //API implementation
-$facts_url = "http://localhost/petapp/api/facts.php";
+$facts_url = "http://localhost/awa/api/facts.php";
 
 $client = curl_init($facts_url);
 curl_setopt($client, CURLOPT_RETURNTRANSFER, true); //return transfer as a string
@@ -55,7 +55,7 @@ $stmt->execute();
 
             ?>
         </div>
-    </main>
+    </main> 
 <?php } else {
     header("Location: login.php");
 } ?>

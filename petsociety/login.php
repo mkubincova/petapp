@@ -2,10 +2,10 @@
 
 <main class="login-page">
     <div class="login-container">
-    <h3>Login</h3>
+    <h2>Login</h2>
         <form action="" method="post">
-            <input name="username" type="text" placeholder="Username"><br>
-            <input name="password" type="password" placeholder="Password"><br>
+            <input name="username" type="text" placeholder="*Username"><br>
+            <input name="password" type="password" placeholder="*Password"><br>
             <input type="submit" value="Login">
         </form>
     </div>

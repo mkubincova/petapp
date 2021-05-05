@@ -4,7 +4,7 @@
     <main>
         <h2>Browse Pets</h2>
         <form method="post">
-            <input type="text" name="search" class="search-field" placeholder="Search for pets" />
+            <input type="text" name="search" class="search-field" placeholder="Type their name here..." />
             <button type="submit" name="searchbutton">Search <img class='icon' src='img/icons/search-yellow.png'></button>
             <button type="submit" name="showall" class="all-btn">Show all pets <img class='icon' src='img/icons/pets.png'></button>
         </form>

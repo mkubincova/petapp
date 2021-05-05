@@ -9,7 +9,7 @@
     <main>
         <h2>Feed</h2>
         <form class="post-form" method="post" enctype="multipart/form-data">
-            <textarea class="post-input" name="text" type="text"></textarea><br>
+            <textarea class="post-input emoji" name="text" type="text" style="display:none"></textarea><br>
             <div class="post-buttons">
                 <input name="img" type="file"><br>
                 <!-- <input type="submit" name="postbtn" value="Create a post"> -->
@@ -81,14 +81,14 @@
                     echo "<p class='timestamp-comment'>" . $comment['timestamp'] . "</p></div>";
 
                     if ($comment['comment_userID'] == $_SESSION['userId'] || $_SESSION['username'] == 'admin') {
-                        echo '<form method="post"><input type="submit" value="Delete this comment" class="delete btn-small" name="deletecomment' . $comment['commentID'] . '"></form></div></div>';
+                        echo '<form method="post"><input type="submit" value="Delete" class="delete btn-small" name="deletecomment' . $comment['commentID'] . '"></form></div></div>';
                     } else {
                         echo "</div></div>";
                     }   
                 }
             }
 
-            echo "<div class='post-comment'><form method='post'><textarea class='comment-input' cols='50' rows='2' name='commenttext' type='text'></textarea><br>";
+            echo "<div class='post-comment'><form method='post'><textarea class='comment-input emoji' cols='50' rows='2' name='commenttext' type='text' style='display:none'></textarea><br>";
             echo "<button name='commentbtn" . $row['postID'] . "'>Comment <img class='icon comment' src='img/icons/comment-yellow.png'></button></form></div></div></div>";
 
         }

@@ -58,13 +58,13 @@ if ($_SESSION) { ?>
                     $petId = $row['petID'];
                     $imgUrl =  $row['imgUrl'];
 
-                    echo '<span class="bold">Name*:</span> <input name="name" type="text" value="' . $row['name'] . '"><br>';
-                    echo '<span class="bold">Species*:</span> <input name="species" type="text" value="' . $row['species'] . '"><br>';
-                    echo '<span class="bold">Breed:</span> <input name="breed" type="text" value="' . $row['breed'] . '"><br>';
-                    echo '<span class="bold">Birthday:</span> <input name="birthday" type="date" value="' . $row['birthday'] . '"><br>';
-                    echo '<span class="bold">Likes:</span> <br> <textarea cols="30" rows="3" name="likes" type="text">' . $row['likes'] . '</textarea><br>';
-                    echo '<span class="bold">Dislikes:</span> <br> <textarea cols="30" rows="3" name="dislikes" type="text">' . $row['dislikes'] . '</textarea><br>';
-                    echo '<span class="bold">Other information:</span> <br> <textarea cols="30" rows="10" name="other" type="text">' . $row['otherInformation'] . '</textarea><br>';
+                    echo '<label class="bold">Name*:</label> <input name="name" type="text" value="' . $row['name'] . '" class="emoji" style="display: none;"><br>';
+                    echo '<label class="bold">Species*:</label><br> <input name="species" type="text" value="' . $row['species'] . '"><br>';
+                    echo '<label class="bold">Breed:</label><br> <input name="breed" type="text" value="' . $row['breed'] . '"><br>';
+                    echo '<label class="bold">Birthday:</label><br> <input name="birthday" type="date" value="' . $row['birthday'] . '"><br>';
+                    echo '<label class="bold">Likes:</label> <br> <textarea cols="30" rows="3" name="likes" type="text" class="emoji" style="display: none;">' . $row['likes'] . '</textarea><br>';
+                    echo '<label class="bold">Dislikes:</label> <br> <textarea cols="30" rows="3" name="dislikes" type="text" class="emoji" style="display: none;">' . $row['dislikes'] . '</textarea><br>';
+                    echo '<label class="bold">Other information:</label> <br> <textarea cols="30" rows="10" name="other" type="text" class="emoji" style="display: none;">' . $row['otherInformation'] . '</textarea><br>';
                     echo "<img src='img/" . $imgUrl . "'></img><br>";
                     echo "<input type='hidden' value='" . $imgUrl . "' name='oldimg' />";
                     echo "<input type='hidden' value='" . $petId . "' name='petId' />";

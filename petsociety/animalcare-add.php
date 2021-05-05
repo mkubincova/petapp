@@ -9,15 +9,15 @@ include 'partials/img-upload.php';
             <h2 class="addanimal-h1">Add Animal</h2>
             <form method="post" enctype="multipart/form-data">
                 <label class="bold">Species* (required)</label><br>
-                <textarea cols="60" rows="1" name="species" type="text"></textarea><br>
+                <textarea cols="60" rows="1" name="species" type="text" class="emoji" style="display: none;"></textarea><br>
                 <label class="bold">Facts* (required)</label><br>
-                <textarea cols="60" rows="4" name="facts" type="text"></textarea><br>
+                <textarea cols="60" rows="4" name="facts" type="text" class="emoji" style="display: none;"></textarea><br>
                 <label class="bold">Characteristics</label><br>
-                <textarea cols="60" rows="4" name="characteristics" type="text"></textarea><br>
+                <textarea cols="60" rows="4" name="characteristics" type="text" class="emoji" style="display: none;"></textarea><br>
                 <label class="bold">Average lifespan</label><br>
-                <textarea cols="60" rows="1" name="averagelifespan" type="text"></textarea><br>
+                <textarea cols="60" rows="1" name="averagelifespan" type="text" class="emoji" style="display: none;"></textarea><br>
                 <label class="bold">Forbidden food</label><br>
-                <textarea cols="60" rows="4" name="forbiddenfood" type="text"></textarea><br>
+                <textarea cols="60" rows="4" name="forbiddenfood" type="text" class="emoji" style="display: none;"></textarea><br>
                 <label class="bold">Profile picture* (must be jpg/jpeg/png and under 5MB)</label><br>
                 <input name="img" type="file" class="image"><br>
                 <input type="hidden" id="imgUrl" name="imgUrl">
@@ -70,7 +70,7 @@ if (isset($_POST["addbtn"])) {
     } else {
         echo "The animal couldn't be added. Please fill in species, facts and add an image.";
     }
-} 
+}
 
 ?>
 

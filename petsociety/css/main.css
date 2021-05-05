@@ -252,7 +252,7 @@ div.post-buttons {
     flex-direction: row;
 }
 
-div.post-buttons > input[type=submit]{
+div.post-buttons > button{
     margin-left: 25px;
 }
 
@@ -312,7 +312,7 @@ p.author-timestamp:nth-child(2) {
 
 div.author-time-delete > form > button {
     margin-left: 30px;
-    margin-top: 7px;
+    margin-top: 7px; 
 }
 
 div.all-comments {

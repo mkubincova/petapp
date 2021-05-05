@@ -12,7 +12,8 @@
             <textarea class="post-input" name="text" type="text"></textarea><br>
             <div class="post-buttons">
                 <input name="img" type="file"><br>
-                <input type="submit" name="postbtn" value="Create a post">
+                <!-- <input type="submit" name="postbtn" value="Create a post"> -->
+                <button name="postbtn">Create a post <img class="icon" src="img/icons/add-yellow.png"></button>
             </div>
         </form>
     

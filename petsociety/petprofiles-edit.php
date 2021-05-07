@@ -27,7 +27,6 @@ if ($_SESSION) { ?>
 
             $result = $stmt->get_result();
             $owners = array();
-            $owner = '';
             $petId = '';
 
 
@@ -48,7 +47,6 @@ if ($_SESSION) { ?>
             //check if user is one of the owners
             //if the user is not one of the owners, they will be redirected to petprofiles.php
             if (in_array($_SESSION['userId'], $owners)) {
-                $owner = $_SESSION['userId'];
 
                 //display petprofile as a form
                 echo "<form method='post' action='partials/edit-petprofile.php' method='post' enctype='multipart/form-data'>";

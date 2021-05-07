@@ -80,7 +80,7 @@
                     echo "<div class='author-time-delete-comment'><div class='author-time-comment'><p class='author-comment'>" . $comment['username'] . "</p>";
                     echo "<p class='timestamp-comment'>" . $comment['timestamp'] . "</p></div>";
 
-                    if ($comment['comment_userID'] == $_SESSION['userId'] || $_SESSION['username'] == 'admin') {
+                    if ($comment['comment_userID'] == $_SESSION['userId'] || $_SESSION['userType'] == 'admin') {
                         echo '<form method="post"><input type="submit" value="Delete" class="delete btn-small" name="deletecomment' . $comment['commentID'] . '"></form></div></div>';
                     } else {
                         echo "</div></div>";

@@ -4,8 +4,8 @@
     <div class="login-container">
     <h2>Login</h2>
         <form action="" method="post">
-            <input name="username" type="text" placeholder="*Username"><br>
-            <input name="password" type="password" placeholder="*Password"><br>
+            <input name="username" type="text" placeholder="Username"><br>
+            <input name="password" type="password" placeholder="Password"><br>
             <input type="submit" value="Login">
         </form>
     </div>
@@ -15,13 +15,9 @@
 //user authentication
 if (isset($_POST["username"]) && isset($_POST["password"])) {
 
-    //get form data
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-    //sanitize data
-    $username = htmlspecialchars($username, ENT_QUOTES, 'UTF-8');
-    $password = md5(htmlspecialchars($password, ENT_QUOTES, 'UTF-8'));
+    //get & sanitize form data
+    $username = htmlspecialchars($_POST["username"]);
+    $password = md5(htmlspecialchars($_POST["password"]));
 
     //find user in db
     $query = "SELECT *
@@ -51,7 +47,7 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
     if ($_SESSION) {
         header("Location: index.php");
     } else {
-        echo "<p>Your username or password is incorrect! Please try again.</p>";
+        echo '<p class="error">Your username or password is incorrect! Please try again.</p>';
     }
 
     

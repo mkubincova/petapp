@@ -27,7 +27,7 @@ body{
     max-width: 960px;
     min-height: 50vh;
     margin: auto;
-    margin-bottom: 60px;
+    margin-bottom: 100px;
     text-align: center;
 }
 
@@ -88,7 +88,10 @@ button.edit:hover {
 .btn-small{
     font-size: 0.5rem !important;
     padding: 5px !important;
-    margin: 0px 0px 0px 15px !important;
+    margin: 3px 0px 0px 15px !important;
+}
+button.btn-icon{
+    background-color: rgba(0, 0, 0, 0);
 }
 
 input, textarea, .emojionearea {
@@ -227,6 +230,7 @@ footer p{
 h5.fact-heading {
     margin-bottom: 0;
     margin-top: 30px;
+    font-weight: bold;
 }
 
 
@@ -395,7 +399,6 @@ p.timestamp-comment {
     text-align: left;
     padding: 2px 0;
 }
-
 textarea.post-input,
 .emojionearea.post-input {
     margin: 0 auto;
@@ -760,4 +763,25 @@ p.forbidden-food {
 }
 .icon.comment, .icon.characteristics {
     padding-left: 5px;
+}
+
+/* Error message */
+.error{
+    color: #fd9967;
+    font-weight: bold;
+}
+.text-small{
+    font-size: 0.5rem;
+    margin-bottom: 0;
+}
+
+div.visibility{
+    position: relative;
+    display: inline-block;
+}
+img.visibility{
+    position: absolute;
+    top: 25%;
+    right: 10px;
+    cursor: pointer;
 }

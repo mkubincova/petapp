@@ -77,3 +77,22 @@ if (document.querySelector(".account-page")) {
         }
     }
 }
+
+
+/* TOGGLE PASSWORD VISIBILITY */
+
+function togglePassword() {
+
+    //select input field and icon
+    var x = document.getElementById("psw");
+    var icon = document.getElementById("eye");
+
+    //check current input type and set it and image source accordingly
+    if (x.type === "password") {
+        x.type = "text";
+        icon.src = "img/icons/eye-closed.png";
+    } else {
+        x.type = "password";
+        icon.src = "img/icons/eye-open.png";
+    }
+} 

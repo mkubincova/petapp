@@ -1,11 +1,12 @@
 <?php
-//check query parameters
+ob_start();
+//check query parameters for animal id
 $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
+$imgUrl = "";
 ?>
 
-<?php include 'partials/header.php';
-        include 'partials/img-upload.php';
-
+<?php
+include "partials/header.php";
 ?>
 
 <?php if ($_SESSION) { ?>
@@ -13,8 +14,7 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
 
         <div class="animalcare-single-container">
 
-        <?php
-
+            <?php
             $query = "SELECT * FROM animal WHERE animalID = ?";
             $stmt = $db->prepare($query);
             $stmt->bind_param("i", $id);
@@ -22,56 +22,76 @@ $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
             $result = $stmt->get_result();
 
             while ($row = $result->fetch_assoc()) {
-                echo "<div class='animalinfo-container'>";
-                $imgUrl = $row['imgUrl'];
-                echo "<img src='img/" . $row['imgUrl'] . "'>";
-                echo "<h2>" . $row['species'] . "</h2>";
-                echo "<div class='animalinfo-text'>";
-                echo "<p class='facts'><span class='bold'>Facts <img class='icon' src='img/icons/fact.png'></span><br>" . $row['facts'] . "</p>";
-                if (!empty($row['characteristics'])) {
-                    echo "<p class='characteristics'><span class='bold'>Characteristics<img class='icon characteristics' src='img/icons/characteristics.png'><br></span>" . $row['characteristics'] . "</p>";
-                }
-                if (!empty($row['averageLifespan'])) {
-                echo "<p class='average-lifespan'><span class='bold'>Average Lifespan <img class='icon' src='img/icons/lifespan.png'><br></span>" . $row['averageLifespan'] . "</p>"; 
-                }
-                if (!empty($row['forbiddenFood'])) {
-                echo "<p class='forbidden-food'><span class='bold'>Forbidden Food <img class='icon' src='img/icons/forbidden-food.png'><br></span>" . $row['forbiddenFood'] . "</p>";
-                }
-                echo "</div>";
-                echo "</div>";
-            };
+                $imgUrl = $row["imgUrl"]; ?>
 
+                <div class="animalinfo-container">
+                    <img src="img/<?= $imgUrl ?>">
+                    <h2><?= $row["species"] ?></h2>
 
-            if ($_SESSION["userType"] == 'admin') {
-                echo '<div class="animalsingle-btn-container">';
-                echo '<form method="post"><button class="edit" type="submit" name="editbtn">Edit Animal <img class="icon" src="img/icons/edit.png"></button></form>';
-                echo '<form method="post"><button class="delete" type="submit" name="deletebtn">Delete Animal <img class="icon" src="img/icons/delete.png"></button></form>';
-                echo '</div>';
+                    <div class="animalinfo-text">
+                        <p class="facts">
+                            <span class="bold">Facts <img class="icon" src="img/icons/fact.png"></span><br>
+                            <?= $row['facts'] ?>
+                        </p>
 
-            }
+                        <?php if (!empty($row["characteristics"])) { ?>
+                            <p class="characteristics">
+                                <span class="bold">Characteristics<img class="icon characteristics" src="img/icons/characteristics.png"></span><br>
+                                <?= $row["characteristics"] ?>
+                            </p>
+                        <?php }
 
-            if (isset($_POST['editbtn'])) {
-                header("Location: animalcare-edit.php?id=" . $id);
-            } else if (isset($_POST['deletebtn'])) {
-                $query = "DELETE FROM animal WHERE animalID = ?";
-                $stmt = $db->prepare($query);
-                $stmt->bind_param("i", $id);
+                        if (!empty($row["averageLifespan"])) { ?>
+                            <p class="average-lifespan">
+                                <span class="bold">Average Lifespan <img class="icon" src="img/icons/lifespan.png"></span><br>
+                                <?= $row["averageLifespan"] ?>
+                            </p>
+                        <?php }
 
-                if ($stmt->execute()) {
-                    $stmt->close();
-                    unlink('img/' . $imgUrl);
-                    header("Location: animalcare.php");
-                }
-            }
+                        if (!empty($row["forbiddenFood"])) { ?>
+                            <p class="forbidden-food">
+                                <span class="bold">Forbidden Food <img class="icon" src="img/icons/forbidden-food.png"></span><br>
+                                <?= $row["forbiddenFood"] ?>
+                            </p>
+                        <?php } ?>
+                    </div>
+                </div>
+            <?php };
 
-
-        ?>
-
-
+            if ($_SESSION["userType"] == "admin") { ?>
+                <div class="animalsingle-btn-container">
+                    <form action="animalcare-edit.php?id=<?=$id?>" method="post">
+                        <button class="edit" type="submit" name="editbtn">Edit Animal <img class="icon" src="img/icons/edit.png"></button>
+                    </form>
+                    <form method="post">
+                        <button class="delete" type="submit" name="deletebtn">Delete Animal <img class="icon" src="img/icons/delete.png"></button>
+                    </form>
+                </div>
+            <?php } ?>
         </div>
     </main>
 <?php } else {
     header("Location: login.php");
 } ?>
 
-<?php include 'partials/footer.php'; ?>
+<?php include "partials/footer.php"; ?>
+
+
+<?php
+
+//DELETE & EDIT BUTTON
+if (isset($_POST["deletebtn"])) {
+
+    $query = "DELETE FROM animal WHERE animalID = ?";
+    $stmt = $db->prepare($query);
+    $stmt->bind_param("i", $id);
+
+    if ($stmt->execute()) {
+        $stmt->close();
+        unlink("img/" . $imgUrl);
+        header("Location: animalcare.php");
+    }
+} 
+ob_end_flush();
+
+?>

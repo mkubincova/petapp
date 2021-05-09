@@ -1,6 +1,6 @@
 <?php
 
-include 'configurations/config.php';
+include "configurations/config.php";
 
 //if statement to check if the user is logged in
 ($_SESSION) ? header("Location: mypets.php") :

@@ -1,6 +1,6 @@
 <?php
-include 'configurations/config.php';
-include 'configurations/db-connection.php';
+include "configurations/config.php";
+include "configurations/db-connection.php";
 ?>
 
 <!DOCTYPE html>
@@ -11,6 +11,7 @@ include 'configurations/db-connection.php';
     <meta charset="utf-8" />
     <meta description="Social media for pet owners" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Stylesheets & fonts -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
     <link href="css/cropper.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="css/emojionearea.min.css">
@@ -28,11 +29,12 @@ include 'configurations/db-connection.php';
         <?php if ($_SESSION) { ?>
             <nav id="topnav">
                 <ul>
-                    <li><a href="mypets.php" class="<?php echo ($currentPage == 'mypets.php') ? 'active' : ''; ?>">My Pets</a></li>
-                    <li><a href="petprofiles.php" class="<?php echo ($currentPage == 'petprofiles.php') ? 'active' : ''; ?>">Browse Pets</a></li>
-                    <li><a href="feed.php" class="<?php echo ($currentPage == 'feed.php') ? 'active' : ''; ?>">Feed</a></li>
-                    <li><a href="animalcare.php" class="<?php echo ($currentPage == 'animalcare.php') ? 'active' : ''; ?>">Animal Care</a></li>
-                    <li><a href="account.php" class="<?php echo ($currentPage == 'account.php') ? 'active' : ''; ?>"><img class='nav-icon' src='img/icons/account-purple.png'></a></li>
+                    <!-- add class .active to link for current page -->
+                    <li><a href="mypets.php" class="<?=($currentPage == "mypets.php") ? "active" : ""; ?>">My Pets</a></li>
+                    <li><a href="petprofiles.php" class="<?=($currentPage == "petprofiles.php") ? "active" : ""; ?>">Browse Pets</a></li>
+                    <li><a href="feed.php" class="<?=($currentPage == "feed.php") ? "active" : ""; ?>">Feed</a></li>
+                    <li><a href="animalcare.php" class="<?=($currentPage == "animalcare.php") ? "active" : ""; ?>">Animal Care</a></li>
+                    <li><a href="account.php" class="<?=($currentPage == "account.php") ? "active" : ""; ?>"><img class="nav-icon" src="img/icons/account-purple.png"></a></li>
                 </ul>
             </nav>
         <?php } ?>

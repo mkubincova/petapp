@@ -1,48 +1,5 @@
 <?php include 'partials/header.php'; ?>
 
-<?php
-//check if at least username and password are set
-if (isset($_POST["username"]) && isset($_POST["password"])) {
-
-    //get form data
-    $username = $_POST['username'];
-    $fname = $_POST['fname'];
-    $lname = $_POST['lname'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $id = $_SESSION["userId"];
-
-    //sanitize data
-    $username = htmlspecialchars($username, ENT_QUOTES, 'UTF-8');
-    $fname = htmlspecialchars($fname, ENT_QUOTES, 'UTF-8');
-    $lname = htmlspecialchars($lname, ENT_QUOTES, 'UTF-8');
-    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
-    $password = htmlspecialchars($password, ENT_QUOTES, 'UTF-8');
-
-    //update user in db
-    $query = "UPDATE user 
-    SET username = ?, password = ?, firstname = ?, lastname = ?, email = ?
-    WHERE userID = ?";
-
-    $stmt = $db->prepare($query);
-    $stmt->bind_param("sssssi", $username, $password, $fname, $lname, $email, $id);
-
-    //if the statement was executed, reset session variables with new values & reload
-    if ($stmt->execute()) {
-        $_SESSION["username"] = $username;
-        $_SESSION["password"] = $password;
-        $_SESSION["firstName"] = $fname;
-        $_SESSION["lastName"] = $lname;
-        $_SESSION["email"] = $email;
-        header("Location: account.php");
-    } else {
-        echo "<p>Editing failed, please try again.</p>";
-    }
-
-    $stmt->close();
-}
-?>
-
 <?php if ($_SESSION) { ?>
     <main class="account-page">
         <div class="account-container">
@@ -51,20 +8,125 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
             <button class="edit">Edit <img class="icon" src="img/icons/edit.png"></button>
 
             <form action="" method="post">
-                <input name="username" type="text" value="<?php echo $_SESSION["username"] ?>" placeholder="Username" size="30"><br>
-                <input name="fname" type="text" value="<?php echo $_SESSION["firstName"] ?>" placeholder="First name" size="30"><br>
-                <input name="lname" type="text" value="<?php echo $_SESSION["lastName"] ?>" placeholder="Last name" size="30"><br>
-                <input name="email" type="email" value="<?php echo $_SESSION["email"] ?>" placeholder="Email address" size="30"><br>
-                <input name="password" type="password" value="<?php echo $_SESSION["password"] ?>" placeholder="Password" size="30"><br>
-                <input type="submit" value="Save changes">
+                <input name="username" type="text" value="<?= $_SESSION["username"] ?>" placeholder="Username (required)" size="30"><br>
+                <input name="fname" type="text" value="<?= $_SESSION["firstName"] ?>" placeholder="First name" size="30"><br>
+                <input name="lname" type="text" value="<?= $_SESSION["lastName"] ?>" placeholder="Last name" size="30"><br>
+                <input name="email" type="email" value="<?= $_SESSION["email"] ?>" placeholder="Email address" size="30"><br>
+                <div class="visibility">
+                    <input name="password" type="password" id="psw" value="********" placeholder="Password (required)" size="30">
+                    <img class="icon visibility" id="eye" src="img/icons/eye-open.png" alt="show" onclick="togglePassword()">
+                </div><br>
+                <input type="submit" name="submit" value="Save changes">
             </form>
 
-            <a href="partials/delete-account.php"><button class="delete">Delete account <img class="icon" src="img/icons/delete.png"></button></a>
-    </div>
+            <form action="" method="post">
+                <p class="text-small">*Don't forget to delete all your pets before deleting the account!</p>
+                <button class="delete" type="submit" name="delete">Delete account <img class="icon" src="img/icons/delete.png"></button>
+            </form>
+
+        </div>
     </main>
 <?php } else {
     header("Location: login.php");
 } ?>
 
+<?php
+/* EDIT ACCOUNT DETAILS */
 
-<?php include 'partials/footer.php'; ?>
+if (isset($_POST["submit"])) {
+    //check if at least username and password are set
+    if (isset($_POST["username"]) && isset($_POST["password"])) {
+
+        //get & sanitize form data
+        $username = htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8');
+        $fname = htmlspecialchars($_POST['fname'], ENT_QUOTES, 'UTF-8');
+        $lname = htmlspecialchars($_POST['lname'], ENT_QUOTES, 'UTF-8');
+        $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+
+        if ($_POST["password"] != "********") {
+            $password = md5(htmlspecialchars($_POST['password'], ENT_QUOTES, 'UTF-8'));
+        } else {
+            $password = $_SESSION["password"];
+        }
+        
+        $id = $_SESSION["userId"];
+
+        //update user in db
+        $query = "UPDATE user 
+                SET username = ?, password = ?, firstname = ?, lastname = ?, email = ?
+                WHERE userID = ?";
+
+        $stmt = $db->prepare($query);
+        $stmt->bind_param("sssssi", $username, $password, $fname, $lname, $email, $id);
+
+        //if the statement was executed, reset session variables with new values & reload
+        if ($stmt->execute()) {
+            $_SESSION["username"] = $username;
+            $_SESSION["password"] = $password;
+            $_SESSION["firstName"] = $fname;
+            $_SESSION["lastName"] = $lname;
+            $_SESSION["email"] = $email;
+            header("Location: account.php");
+        } else {
+            echo '<p class="error">Editing failed, please try again.</p>';
+        }
+        $stmt->close();
+    }
+}
+
+
+/* DELETE ACCOUNT */
+if (isset($_POST["delete"])) {
+
+    $id = $_SESSION["userId"];
+
+    //delete user comments
+    $comments = "DELETE FROM comment WHERE userId = ?";
+    $stmt = $db->prepare($comments);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $stmt->close();
+
+    
+    //select the imgUrl to unlink the image
+    $postImg = "SELECT * FROM post WHERE userId = ?";
+    $stmt = $db->prepare($postImg);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    while ($row = $result->fetch_assoc()) {
+        unlink("img/" . $row["imgUrl"]);
+    }
+    $stmt->close();
+
+    //delete user posts
+    $posts = "DELETE FROM post WHERE userId = ?";
+    $stmt = $db->prepare($posts);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $stmt->close();
+
+    //delete account from user_pet table
+    $query = "DELETE FROM user_pet WHERE userId = ?";
+    $stmt = $db->prepare($query);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $stmt->close();
+
+    //delete account from user table
+    $query2 = "DELETE FROM user WHERE userID = ?";
+    $stmt2 = $db->prepare($query2);
+    $stmt2->bind_param("i", $id);
+
+    if ($stmt2->execute()) {
+        $stmt2->close();
+        header("Location: partials/logout.php");
+    } else {
+        echo '<p class="error">There has been an error processing your request, please try again.</p>';
+    }
+}
+
+?>
+
+<?php include "partials/footer.php"; ?>

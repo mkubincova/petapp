@@ -4,7 +4,7 @@ include "partials/header.php";
 
 <?php
 //API IMPLEMENTATION
-$facts_url = "http://localhost/awa/api/facts.php"; //url of api
+$facts_url = "http://localhost/petapp/api/facts.php"; //url of api
 
 $client = curl_init($facts_url);
 

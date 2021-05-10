@@ -33,21 +33,44 @@ if (isset($_POST["submit"])) {
         $password = md5(htmlspecialchars($_POST["password"], ENT_QUOTES, 'UTF-8'));
         $type = "user";
 
-        //create user in db
-        $query = "INSERT INTO user (userType, username, password, firstname, lastname, email) 
-            VALUES (?, ?, ?, ?, ?, ?)";
+        //create an array for saving existing usernames from the db
+        $existingUsernames = array();
 
+        //select all usernames from the user table
+        $query = "SELECT username FROM user";
         $stmt = $db->prepare($query);
-        $stmt->bind_param("ssssss", $type, $username, $password, $fname, $lname, $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-        //if the statement was executed, redirect user to login page
-        if ($stmt->execute()) {
-            header("Location: login.php");
-        } else {
-            echo '<p class="error">The registration failed, please try again.</p>';
+        //save all usernames in the array
+        while ($row = $result->fetch_assoc()) {
+            $existingUsernames[] = $row["username"];
         }
 
         $stmt->close();
+
+        //if the entered username is not in the array
+        if (!in_array($username, $existingUsernames)) {
+
+            //create user in db
+            $query = "INSERT INTO user (userType, username, password, firstname, lastname, email) 
+            VALUES (?, ?, ?, ?, ?, ?)";
+
+            $stmt = $db->prepare($query);
+            $stmt->bind_param("ssssss", $type, $username, $password, $fname, $lname, $email);
+
+            //if the statement was executed, redirect user to login page
+            if ($stmt->execute()) {
+                header("Location: login.php");
+            } else {
+                echo '<p class="error">The registration failed, please try again.</p>';
+            }
+
+            $stmt->close();
+        } else {
+            echo '<p class="error">There is already a user with this username. Please choose a different one.</p>';
+        }
+
     } else {
         echo '<p class="error">Your password must be at least 8 characters long and contain at least one number.</p>';
     }

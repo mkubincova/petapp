@@ -31,46 +31,79 @@
 } ?>
 
 <?php
+
 /* EDIT ACCOUNT DETAILS */
 
 if (isset($_POST["submit"])) {
+
     //check if at least username and password are set
     if (isset($_POST["username"]) && isset($_POST["password"])) {
 
         //get & sanitize form data
-        $username = htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8');
-        $fname = htmlspecialchars($_POST['fname'], ENT_QUOTES, 'UTF-8');
-        $lname = htmlspecialchars($_POST['lname'], ENT_QUOTES, 'UTF-8');
-        $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-
+        $username = htmlspecialchars($_POST["username"], ENT_QUOTES, 'UTF-8');
+        $fname = htmlspecialchars($_POST["fname"], ENT_QUOTES, 'UTF-8');
+        $lname = htmlspecialchars($_POST["lname"], ENT_QUOTES, 'UTF-8');
+        $email = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
+        
+        //if the password is changed from the original value (********), sanitize and hash it, otherwise set it to the current password
         if ($_POST["password"] != "********") {
-            $password = md5(htmlspecialchars($_POST['password'], ENT_QUOTES, 'UTF-8'));
+            $password = md5(htmlspecialchars($_POST["password"], ENT_QUOTES, 'UTF-8'));
         } else {
             $password = $_SESSION["password"];
         }
-        
+
         $id = $_SESSION["userId"];
 
-        //update user in db
-        $query = "UPDATE user 
-                SET username = ?, password = ?, firstname = ?, lastname = ?, email = ?
-                WHERE userID = ?";
+        //check the password requirements if the password has been changed
+        if (strlen($_POST["password"]) >= 8 && preg_match("#[0-9]+#", $_POST["password"]) || $_POST["password"] == "********") {
+            
+            //create an array for saving existing usernames from the db
+            $existingUsernames = array();
 
-        $stmt = $db->prepare($query);
-        $stmt->bind_param("sssssi", $username, $password, $fname, $lname, $email, $id);
+            //select all usernames from the user table
+            $query = "SELECT username FROM user";
+            $stmt = $db->prepare($query);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
-        //if the statement was executed, reset session variables with new values & reload
-        if ($stmt->execute()) {
-            $_SESSION["username"] = $username;
-            $_SESSION["password"] = $password;
-            $_SESSION["firstName"] = $fname;
-            $_SESSION["lastName"] = $lname;
-            $_SESSION["email"] = $email;
-            header("Location: account.php");
+            //save all usernames in the array
+            while ($row = $result->fetch_assoc()) {
+                $existingUsernames[] = $row["username"];
+            }
+
+            $stmt->close();
+
+            //if the entered username is not in the array or the username is the same as the logged in session, update user
+            if (!in_array($username, $existingUsernames) || $username == $_SESSION["username"]) {
+
+                //update user in db
+                $query = "UPDATE user 
+                        SET username = ?, password = ?, firstname = ?, lastname = ?, email = ?
+                        WHERE userID = ?";
+
+                $stmt = $db->prepare($query);
+                $stmt->bind_param("sssssi", $username, $password, $fname, $lname, $email, $id);
+
+                //if the statement was executed, reset session variables with new values & reload
+                if ($stmt->execute()) {
+                    $_SESSION["username"] = $username;
+                    $_SESSION["password"] = $password;
+                    $_SESSION["firstName"] = $fname;
+                    $_SESSION["lastName"] = $lname;
+                    $_SESSION["email"] = $email;
+                    header("Location: account.php");
+                } else {
+                    echo '<p class="error">Editing failed, please try again.</p>';
+                }
+                $stmt->close();
+
+            } else { 
+                echo '<p class="error">There is already a user with this username. Please choose a different one.</p>';
+            } 
+        
         } else {
-            echo '<p class="error">Editing failed, please try again.</p>';
+            echo '<p class="error">Your password must be at least 8 characters long and contain at least 1 number.</p>';
         }
-        $stmt->close();
     }
 }
 

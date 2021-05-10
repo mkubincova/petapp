@@ -6,7 +6,7 @@
 
             <h2>Fill the form to create a profile for your pet :)</h2>
 
-            <form action="partials/create-petprofile.php" method="post" enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data">
                 <label class="bold">Name (required):</label>
                 <input name="name" type="text" placeholder="Roxy" class="emoji" style="display: none;"><br>
                 

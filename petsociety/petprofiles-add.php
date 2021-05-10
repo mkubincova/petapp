@@ -84,7 +84,7 @@ if (isset($_POST["submit"])) {
             $stmt2->bind_param("ii", $userId, $petId);
 
             if ($stmt2->execute()) {
-                header("Location: ../mypets.php");
+                header("Location: mypets.php");
             } else {
                 echo '<p class="error">There was an error processing your request, please try again.</p>';
             }

@@ -64,7 +64,7 @@ include "partials/header.php";
                         <button class="edit" type="submit" name="editbtn">Edit Animal <img class="icon" src="img/icons/edit.png"></button>
                     </form>
                     <form method="post">
-                        <button class="delete" type="submit" name="deletebtn">Delete Animal <img class="icon" src="img/icons/delete.png"></button>
+                        <button class="delete" type="submit" name="deletebtn" onclick="return deleteAnimal()">Delete Animal <img class="icon" src="img/icons/delete.png"></button>
                     </form>
                 </div>
             <?php } ?>

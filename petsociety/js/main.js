@@ -96,3 +96,25 @@ function togglePassword() {
         icon.src = "img/icons/eye-open.png";
     }
 } 
+
+
+
+/* ALERTS FOR DELETE BUTTONS */
+
+function deletePet() {
+    if(confirm("Are you sure you want to delete this pet?") == false){
+        return false;
+    }
+}
+
+function deleteAnimal() {
+    if(confirm("Are you sure you want to delete this animal?") == false){
+        return false;
+    }
+}
+
+function deleteAccount() {
+    if(confirm("Are you sure you want to delete your account?") == false){
+        return false;
+    }
+}

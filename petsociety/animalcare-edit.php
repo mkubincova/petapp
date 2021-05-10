@@ -79,7 +79,7 @@ if (isset($_POST["savebtn"])) {
         //get image path from root
         $tempImgUrl2 = str_replace("../", "", $tempImgUrl);
 
-        //move uploaded image from temp folder to pet-profiles
+        //move uploaded image from temp folder to animal-care
         $imgUrl = str_replace("../img/temp", "animal-care", $tempImgUrl);
         rename($tempImgUrl2, "img/" . $imgUrl);
 

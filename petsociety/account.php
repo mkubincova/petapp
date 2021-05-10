@@ -21,7 +21,7 @@
 
             <form action="" method="post">
                 <p class="text-small">*Don't forget to delete all your pets before deleting the account!</p>
-                <button class="delete" type="submit" name="delete">Delete account <img class="icon" src="img/icons/delete.png"></button>
+                <button class="delete" type="submit" name="delete" onclick="return deleteAccount()">Delete account <img class="icon" src="img/icons/delete.png"></button>
             </form>
 
         </div>

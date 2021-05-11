@@ -38,8 +38,8 @@ function formValidation (fieldTypeOne, fieldTypeTwo, fieldOne, fieldTwo, imageRe
     inputValueOne.addEventListener('input', checkForm);
     inputValueTwo.addEventListener('input', checkForm);
 
-    //Sets the initial value of the submit button to either true or false
-    submit.disabled = disable;
+    //Sets the initial value of the submit button to false so that it is disabled at first
+    submit.disabled = true;
 
     //If the fields are empty, we disable the submit button, otherwise it's not disabled
     function checkForm(e) {
@@ -99,7 +99,7 @@ function togglePassword() {
 
 
 
-/* ALERTS FOR DELETE BUTTONS */
+/* CONFIRM POPUP FOR DELETE BUTTONS */
 
 function deletePet() {
     if(confirm("Are you sure you want to delete this pet?") == false){

@@ -39,7 +39,7 @@ function formValidation (fieldTypeOne, fieldTypeTwo, fieldOne, fieldTwo, imageRe
     inputValueTwo.addEventListener('input', checkForm);
 
     //Sets the initial value of the submit button to false so that it is disabled at first
-    submit.disabled = true;
+    submit.disabled = disable;
 
     //If the fields are empty, we disable the submit button, otherwise it's not disabled
     function checkForm(e) {

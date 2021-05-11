@@ -27,10 +27,10 @@ include "partials/header.php";
         <div class="editanimal-container">
             <h2 class="editanimal-h1">Edit Animal</h2>
             <form method="post" enctype="multipart/form-data">
-                <label class="bold">Species* (required)</label><br>
+                <label class="bold">Species (required)</label><br>
                 <textarea cols="60" rows="1" name="species" type="text" class="emoji" style="display: none;"><?= $species ?></textarea><br>
 
-                <label class="bold">Facts* (required)</label><br>
+                <label class="bold">Facts (required)</label><br>
                 <textarea cols="60" rows="4" name="facts" type="text" class="emoji" style="display: none;"><?= $facts ?></textarea><br>
 
                 <label class="bold">Characteristics</label><br>

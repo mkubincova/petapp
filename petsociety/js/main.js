@@ -2,14 +2,19 @@
     formValidation(false, false);
 } */
 
-if (document.querySelector(".newpet-page")) {
-    formValidation(true, true);
-} 
+setTimeout(function(){
+   if (document.querySelector(".newpet-page")) {
+        formValidation(true, true);
+    }
+}, 3000);
+ 
 
 function formValidation(imageRequired, disable) {
 
-    fields = document.querySelectorAll(".required > .emojionearea-editor");
+    var fields = document.querySelectorAll(".required > .emojionearea-editor");
     var submit = document.querySelector("input[type=submit]");
+
+    console.log(fields);
 
     submit.disabled = true;
 

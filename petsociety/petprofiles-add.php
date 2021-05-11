@@ -8,7 +8,7 @@
 
             <form method="post" enctype="multipart/form-data">
                 <label class="bold">Name (required):</label>
-                <input name="name" type="text" placeholder="Roxy" class="emoji" style="display: none;"><br>
+                <input name="name" type="text" placeholder="Roxy" class="emoji required" style="display: none;"><br>
                 
                 <label class="bold">Species (required):</label><br>
                 <input name="species" type="text" placeholder="Dog"><br>

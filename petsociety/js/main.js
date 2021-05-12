@@ -16,7 +16,7 @@ setTimeout(function(){
         formValidation2();
     }
 
-}, 3000);
+}, 4000);
 
 
 

@@ -48,7 +48,7 @@ if (isset($_POST["submit"])) {
         }
 
         $stmt->close();
-
+        
         //if the entered username is not in the array
         if (!in_array($username, $existingUsernames)) {
 
@@ -72,7 +72,7 @@ if (isset($_POST["submit"])) {
         }
 
     } else {
-        echo '<p class="error">Your password must be at least 8 characters long and contain at least one number.</p>';
+        echo '<p class="error">You must enter a valid username and password.</p>';
     }
 }
 ?>

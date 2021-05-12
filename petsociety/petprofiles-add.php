@@ -1,20 +1,20 @@
 <?php include "partials/header.php"; ?>
 
 <?php if ($_SESSION) { ?>
-    <main class="newpet-page">
+    <main class="petprofiles-add-page">
         <div class="addpet-container">
 
             <h2>Fill the form to create a profile for your pet :)</h2>
 
             <form method="post" enctype="multipart/form-data">
                 <label class="bold">Name (required):</label>
-                <input name="name" type="text" placeholder="Roxy" class="emoji required" style="display: none;"><br>
+                <input name="name" type="text" placeholder="Roxy" class="emoji required-emoji-1" style="display: none;"><br>
                 
                 <label class="bold">Species (required):</label><br>
-                <input name="species" type="text" placeholder="Dog"><br>
+                <input name="species" type="text" class="required-other" placeholder="Dog"><br>
                 
                 <label class="bold">Breed:</label><br>
-                <input name="breed" type="text" placeholder="Corgi"><br>
+                <input name="breed" type="text" placeholder="Corgi" class="emoji" style="display: none;"><br>
                 
                 <label class="bold">Birthday:</label><br>
                 <input name="birthday" type="date"><br>

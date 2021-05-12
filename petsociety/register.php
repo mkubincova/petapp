@@ -4,12 +4,12 @@
     <div class="register-container">
         <h2>Register</h2>
         <form action="" method="post">
-            <input name="username" type="text" placeholder="Username (required)"><br>
+            <input name="username" type="text" class="required-1" placeholder="Username (required)"><br>
             <input name="fname" type="text" placeholder="First name"><br>
             <input name="lname" type="text" placeholder="Last name"><br>
             <input name="email" type="email" placeholder="Email address"><br>
             <div class="visibility">
-                <input name="password" type="password" id="psw" placeholder="Password (required)">
+                <input name="password" type="password" class="required-2" id="psw" placeholder="Password (required)">
                 <img class="icon visibility" id="eye" src="img/icons/eye-open.png" alt="show" onclick="togglePassword()">
             </div><br>
             <p class="text-small">*Your password must be at least 8 characters long and contain at least 1 number</p>

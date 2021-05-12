@@ -57,10 +57,10 @@ if ($_SESSION) { ?>
                         $imgUrl =  $row["imgUrl"]; ?>
 
                         <label class="bold">Name (required):</label>
-                        <input name="name" type="text" value="<?= $row["name"] ?>" class="emoji required" style="display: none;"><br>
+                        <input name="name" type="text" value="<?= $row["name"] ?>" class="emoji required-emoji-1" style="display: none;"><br>
 
                         <label class="bold">Species (required):</label><br>
-                        <input name="species" type="text" class="required" value="<?= $row["species"] ?>"><br>
+                        <input name="species" type="text" class="required-other" value="<?= $row["species"] ?>"><br>
 
                         <label class="bold">Breed:</label><br>
                         <input name="breed" type="text" value="<?= $row["breed"] ?>"><br>

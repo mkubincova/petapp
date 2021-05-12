@@ -8,12 +8,12 @@
             <button class="edit">Edit <img class="icon" src="img/icons/edit.png"></button>
 
             <form action="" method="post">
-                <input name="username" type="text" value="<?= $_SESSION["username"] ?>" placeholder="Username (required)" size="30"><br>
+                <input name="username" type="text" class="required-1" value="<?= $_SESSION["username"] ?>" placeholder="Username (required)" size="30"><br>
                 <input name="fname" type="text" value="<?= $_SESSION["firstName"] ?>" placeholder="First name" size="30"><br>
                 <input name="lname" type="text" value="<?= $_SESSION["lastName"] ?>" placeholder="Last name" size="30"><br>
                 <input name="email" type="email" value="<?= $_SESSION["email"] ?>" placeholder="Email address" size="30"><br>
                 <div class="visibility">
-                    <input name="password" type="password" id="psw" value="********" placeholder="Password (required)" size="30">
+                    <input name="password" type="password" class="required-2" id="psw" value="********" placeholder="Password (required)" size="30">
                     <img class="icon visibility" id="eye" src="img/icons/eye-open.png" alt="show" onclick="togglePassword()">
                 </div><br>
                 <input type="submit" name="submit" value="Save changes">

@@ -8,10 +8,10 @@ include "partials/header.php";
             <h2 class="addanimal-h1">Add Animal</h2>
             <form method="post" enctype="multipart/form-data">
                 <label class="bold">Species (required)</label><br>
-                <textarea cols="60" rows="1" name="species" type="text" class="emoji" style="display: none;"></textarea><br>
+                <textarea cols="60" rows="1" name="species" type="text" class="emoji required-emoji-1" style="display: none;"></textarea><br>
 
                 <label class="bold">Facts (required)</label><br>
-                <textarea cols="60" rows="4" name="facts" type="text" class="emoji" style="display: none;"></textarea><br>
+                <textarea cols="60" rows="4" name="facts" type="text" class="emoji required-emoji-2" style="display: none;"></textarea><br>
 
                 <label class="bold">Characteristics</label><br>
                 <textarea cols="60" rows="4" name="characteristics" type="text" class="emoji" style="display: none;"></textarea><br>

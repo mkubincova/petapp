@@ -738,7 +738,7 @@ p.forbidden-food {
 }
 
 .addanimal-container > form > input[type=submit], .editanimal-container > form > input[type=submit]{
-    margin: 30px 0px 0px 0px;
+    margin: 30px 0px;
 }
 
 .editanimal-container > form > img {

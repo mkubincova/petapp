@@ -42,7 +42,7 @@ function formValidation(imageRequired, disable) {
  
     //If an image is required, add an event listener to the file input
     if (imageRequired) {
-        imageInput = document.querySelector("input[name=imgUrl]");
+        imageInput = document.querySelector("input[type=file]");
         imageInput.addEventListener('input', checkForm); 
     }
 

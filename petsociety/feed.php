@@ -240,6 +240,9 @@ ob_start();
             }
             $stmt->close();
         }
-    } ?>
+    } 
+    
+    ob_end_flush();
+    ?>
 
     <?php include "partials/footer.php"; ?>

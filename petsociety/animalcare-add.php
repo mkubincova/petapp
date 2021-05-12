@@ -67,7 +67,7 @@ if (isset($_POST["addbtn"])) {
 
         $stmt->close();
     } else {
-        echo '<p class="error">The animal could not be added. Please fill in species, facts and add an image.</p>';
+        echo '<p class="error">The animal could not be added. Please fill in species, facts and add a cropped image.</p>';
     }
 }
 

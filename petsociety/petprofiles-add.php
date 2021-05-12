@@ -92,7 +92,7 @@ if (isset($_POST["submit"])) {
             echo '<p class="error">There was an error processing your request, please try again.</p>';
         }
     } else {
-        echo '<p class="error">You need to submit at least name, species and profile picture!</p>';
+        echo '<p class="error">You need to submit at least name, species and cropped profile picture!</p>';
     }
 }
 ?>

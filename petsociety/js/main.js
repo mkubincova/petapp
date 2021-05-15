@@ -12,11 +12,17 @@ setTimeout(function(){
         formValidation(false, false);
     }
 
-    if (document.querySelector(".account-page") || document.querySelector(".register-page")) {
-        formValidation2();
-    }
-
 }, 4000);
+
+
+//These pages don't need the setTimeout function
+if (document.querySelector(".register-page")) {
+    formValidation2(true);
+}
+
+if (document.querySelector(".account-page")) {
+    formValidation2(false);
+}
 
 
 
@@ -78,15 +84,15 @@ function formValidation(imageRequired, disable) {
 } 
 
 
-function formValidation2() {
+function formValidation2(disabled) {
 
     //Select required fields
     var requiredFieldOne = document.querySelector(".required-1");
     var requiredFieldTwo = document.querySelector(".required-2");
 
-    //Select submit buttomn and disable it
+    //Select submit button and disable it
     var submit = document.querySelector("input[type=submit]");
-    submit.disabled = true;
+    submit.disabled = disabled;
 
     //Add event listeners
     requiredFieldOne.addEventListener('input', checkForm);
@@ -102,8 +108,6 @@ function formValidation2() {
     }
 }
     
-
-
 
 
 

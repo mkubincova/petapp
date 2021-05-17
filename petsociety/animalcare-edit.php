@@ -1,11 +1,15 @@
 <?php
+
 //check query parameters
 $id = (isset($_GET["id"])) ? htmlspecialchars($_GET["id"]) : null;
 
 include "partials/header.php";
 ?>
 
-<?php if ($_SESSION && $_SESSION["userType"] == "admin") {
+<?php 
+if ($_SESSION) {
+
+    if ($_SESSION["userType"] == "admin") {
 
     //Get all data from db to save and put as value text in form
     $query = "SELECT * FROM animal WHERE animalID = ?";
@@ -55,9 +59,14 @@ include "partials/header.php";
             </form>
         </div>
     </main>
-<?php } else {
-    header("Location: login.php");
-}  ?>
+    <?php } else {
+        header("Location: mypets.php");
+    } 
+    
+    } else {
+        header("Location: login.php");
+    }
+  ?>
 
 
 <?php

@@ -2,7 +2,10 @@
 include "partials/header.php";
 ?>
 
-<?php if ($_SESSION && $_SESSION["userType"] == "admin") { ?>
+<?php 
+if ($_SESSION) {
+
+    if ($_SESSION["userType"] == "admin") { ?>
     <main class="animalcare-add-page">
         <div class="addanimal-container">
             <h2 class="addanimal-h1">Add Animal</h2>
@@ -32,8 +35,13 @@ include "partials/header.php";
         </div>
     </main>
 <?php } else {
-    header("Location: login.php");
-}  ?>
+        header("Location: mypets.php");
+    } 
+    
+    } else {
+        header("Location: login.php");
+    }
+  ?>
 
 
 <?php

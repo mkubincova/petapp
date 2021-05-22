@@ -40,14 +40,19 @@ if ($db) {
 //////////////////////////////////////////////////////////////////////////////////////////////// 
     } elseif ($method == "POST"){
 
-        //save new fact into db
-        $query = "INSERT INTO petfacts (text) VALUES (?)";
-        $stmt = $db->prepare($query);
-        $stmt->bind_param("s", $text);
+        if ($text) {
+            //save new fact into db
+            $query = "INSERT INTO petfacts (text) VALUES (?)";
+            $stmt = $db->prepare($query);
+            $stmt->bind_param("s", $text);
 
-        if ($stmt->execute()) {
-            http_response_code(201);
+            if ($stmt->execute()) {
+                http_response_code(201);
+            }
+        } else {
+            echo "Send text in request body";
         }
+        
 
 ///////////////////////////////////////////////////////////////////////////////////////////////         
     } elseif ($method == "PUT") {

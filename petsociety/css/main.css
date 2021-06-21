@@ -5,6 +5,7 @@ color: #333;
 box-sizing: border-box;
 }
 
+
 h1, h2 {
     font-weight: 700;
 }
@@ -193,6 +194,13 @@ footer p{
 
 
 /* Home */
+img#home-img {
+    position: absolute;
+    top: 0px;
+    right: -10px;
+    height: calc(100vh - 54.4px);
+    max-height: none;
+}
 
 .home-container > h1 {
     margin: 90px 0px 10px 0px;
@@ -201,11 +209,15 @@ footer p{
 .home-container > h3 {
     font-weight: 200;
     font-size: 1.74rem;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 
 .home-container > a > button {
     margin-top: 0;
+}
+
+.home-container{
+    text-align: left;
 }
 
 
@@ -786,3 +798,4 @@ img.visibility{
     right: 10px;
     cursor: pointer;
 }
+

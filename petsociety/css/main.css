@@ -196,9 +196,9 @@ footer p{
 /* Home */
 img#home-img {
     position: absolute;
-    top: 0px;
+    top: -2px;
     right: -10px;
-    height: calc(100vh - 54.4px);
+    height: calc(100vh - 50px);
     max-height: none;
 }
 
